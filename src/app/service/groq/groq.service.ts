@@ -10,12 +10,12 @@ export class GroqService {
 
   constructor(private configSvc: ConfigService) {}
 
-  async getSummary(content: string, tone: string, summaryLength: number) {
+  async getSummary(content: string) {
     const response = await (
       await fetch(this.baseURL + '/chat/completions', {
         method: 'POST',
         headers: {
-          Authorization: `Bearer ${this.configSvc.getApiKey('groq')}`,
+          Authorization: `Bearer ${this.configSvc.get('groq')?.api_key}`,
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
@@ -23,11 +23,7 @@ export class GroqService {
             {
               role: 'system',
               content:
-                'You are a helpful assistant who can summary articles. Please summary the article, keep it concise and structured. The tone is ' +
-                tone +
-                ' and the maximum word count of the summary is ' +
-                summaryLength +
-                ' words. Return only the summary with html format, highlight important keyword, no additional communication.',
+                'You are a helpful assistant who can summary articles. Please summary the article, keep it concise and structured. Return only the summary with html format, highlight important keyword, no additional communication.',
             },
             { role: 'user', content: content },
           ],

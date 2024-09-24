@@ -2,63 +2,52 @@
 @tailwind components;
 @tailwind utilities;
 
-body {
+article.prose {
   font-family: "Merriweather", Georgia, serif;
   font-size: 14px;
   line-height: 1.5;
   color: #333;
 }
 
-a {
-  color: #e51919;
-  text-decoration: none;
-  transition: color 0.2s ease;
-}
-
-a:hover,
-a:focus {
-  color: #ba0000;
-}
-
-p {
+article.prose p {
   margin-bottom: 1.5em;
 }
 
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
+article.prose h1,
+article.prose h2,
+article.prose h3,
+article.prose h4,
+article.prose h5,
+article.prose h6 {
   font-weight: 700;
   margin-bottom: 0.5em;
 }
 
-h1 {
-  font-size: 2em;
-}
-
-h2 {
-  font-size: 1.75em;
-}
-
-h3 {
+article.prose h1 {
   font-size: 1.5em;
 }
 
-h4 {
+article.prose h2 {
   font-size: 1.25em;
 }
 
-h5 {
+article.prose h3 {
+  font-size: 1.15em;
+}
+
+article.prose h4 {
+  font-size: 1.05em;
+}
+
+article.prose h5 {
   font-size: 1em;
 }
 
-h6 {
+article.prose h6 {
   font-size: 0.875em;
 }
 
-blockquote {
+article.prose blockquote {
   border-left: 3px solid #e51919;
   margin-left: 0;
   padding-left: 1em;

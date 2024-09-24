@@ -11,8 +11,6 @@ export class SummaryService {
   async getSummary(content: string) {
     return await this.groqSvc.getSummary(
       content,
-      this.configSvc.getTone(),
-      this.configSvc.getSummaryLength()
     );
   }
 }
