@@ -1,7 +1,7 @@
 {
-  "name": "Your App Name",
+  "name": "T.read - AI based reading assistant",
   "version": "1",
-  "description": "Your App Description",
+  "description": "T.read - AI based reading assistant",
   "manifest_version": 3,
   "action": {},
   "icons": {},
@@ -10,9 +10,14 @@
   },
   "permissions": [
     "storage",
+    "tabs",
     "activeTab",
     "sidePanel",
     "scripting"
+  ],
+  "host_permissions": [
+    "http://*/*",
+    "https://*/*"
   ],
   "side_panel": {
     "default_path": "index.html"

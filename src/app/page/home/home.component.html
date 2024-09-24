@@ -1,4 +1,4 @@
-<div class="flex items-center justify-between pr-12 pb-8">
+<div class="fixed top-0 left-0 right-0 flex items-center justify-between p-4">
   <div class="flex space-x-2 bg-gray-100 p-1 rounded-lg">
     <button
       class="px-4 py-2 text-sm font-medium rounded-md transition-colors duration-150"
@@ -23,95 +23,19 @@
       Q&A
     </button>
   </div>
-  <button
-    class="px-4 py-2 bg-gray-700 text-white rounded-lg hover:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-blue-300"
-    (click)="handleGenerate()"
-  >
-    Generate
-  </button>
-</div>
-
-@if (activeTab === 'summary') {
-<div class="flex items-center space-x-4">
-  <div class="flex-grow space-y-2">
-    <label for="summary-length" class="text-sm font-medium"
-      >Summary Length</label
-    >
-    <input
-      type="range"
-      id="slider"
-      min="0"
-      max="100"
-      value="50"
-      class="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer"
-    />
-  </div>
-  <div class="w-40 space-y-2">
-    <label for="summary-tone" class="text-sm font-medium">Tone</label>
-    <select
-      id="summary-tone"
-      class="w-full p-2 border border-gray-300 rounded-md bg-white"
-    >
-      <option value="neutral">Neutral</option>
-      <option value="formal">Formal</option>
-      <option value="casual">Casual</option>
-    </select>
+  <div class="flex">
+    <button (click)="activeTab = 'setting'">
+      <span class="material-symbols-outlined text-4xl"> settings </span>
+    </button>
   </div>
 </div>
-<div class="bg-white rounded-lg shadow-lg p-8">
-  <article class="prose lg:prose-lg xl:prose-xl max-w-none">
-    <h2 class="text-3xl font-bold mb-4">The Impact of IoT on Modern Society</h2>
-    <p class="text-xl mb-4 text-gray-600">
-      A comprehensive look at how the Internet of Things is shaping our world
-    </p>
-    <div class="mb-8">
-      <span class="text-sm text-gray-500">
-        By John Doe • 5 min read • June 15, 2023
-      </span>
-    </div>
-    <div class="space-y-6 text-gray-800">
-      <p>
-        The Internet of Things (IoT) has emerged as a transformative force in
-        our increasingly connected world. This network of smart devices is
-        reshaping how we live, work, and interact with our environment. From
-        smart homes to industrial applications, IoT is driving innovation across
-        various sectors.
-      </p>
-      <h3 class="text-2xl font-semibold mt-8 mb-4">
-        Smart Homes and Energy Efficiency
-      </h3>
-      <p>
-        One of the most visible applications of IoT is in our homes. Smart
-        thermostats, lighting systems, and appliances are not just convenient;
-        they're also helping to optimize energy usage. By learning our habits
-        and preferences, these devices can automatically adjust settings to
-        reduce energy consumption without sacrificing comfort.
-      </p>
-      <h3 class="text-2xl font-semibold mt-8 mb-4">
-        Industrial IoT and Predictive Maintenance
-      </h3>
-      <p>
-        In the industrial sector, IoT devices are revolutionizing maintenance
-        procedures. Sensors can monitor equipment performance in real-time,
-        predicting potential failures before they occur. This proactive approach
-        minimizes downtime, reduces costs, and improves overall operational
-        efficiency.
-      </p>
-      <h3 class="text-2xl font-semibold mt-8 mb-4">Challenges and Concerns</h3>
-      <p>
-        While the benefits of IoT are substantial, it's crucial to address the
-        associated challenges. Security and privacy concerns are at the
-        forefront, as the increasing number of connected devices expands the
-        potential attack surface for cybercriminals. Ensuring robust security
-        measures and transparent data practices will be key to maintaining
-        consumer trust and driving further adoption.
-      </p>
-    </div>
-  </article>
-</div>
 
-} @if (activeTab === 'qa') {
-<div>
-  <p>Q&A functionality would be implemented here.</p>
+<div class="mt-12">
+  @if (activeTab === 'summary') {
+  <app-summary></app-summary>
+  } @if (activeTab === 'qa') {
+  <app-qa></app-qa>
+  } @if (activeTab === 'setting') {
+  <app-config></app-config>
+  }
 </div>
-}
