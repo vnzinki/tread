@@ -1,9 +1,9 @@
-<div style="position: absolute; right: 10px; top: 10px;">
-  <a [routerLink]="['config']" >
-    <span class="material-symbols-outlined">
-      settings
-    </span>
-  </a>
-</div>
+<div class="relative p-4">
+  <div class="absolute top-4 right-4">
+    <button (click)="router.navigate(['/config'])">
+      <span class="material-symbols-outlined text-4xl"> settings </span>
+    </button>
+  </div>
 
-<router-outlet></router-outlet>
+  <router-outlet></router-outlet>
+</div>

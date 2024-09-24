@@ -5,8 +5,13 @@ import { Component } from '@angular/core';
   standalone: true,
   imports: [],
   templateUrl: './home.component.html',
-  styleUrl: './home.component.scss'
+  styleUrl: './home.component.scss',
 })
 export class HomeComponent {
+  summaryLength: number = 50;
+  summaryTone: string = 'neutral';
+  generatedSummary: string = '';
+  activeTab: string = 'summary';
 
+  handleGenerate() {}
 }
