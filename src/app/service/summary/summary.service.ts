@@ -9,7 +9,7 @@ export class SummaryService {
   constructor(private configSvc: ConfigService, private groqSvc: GroqService) {}
 
   async getSummary(content: string) {
-    switch (this.configSvc.getAll().provider) {
+    switch (this.configSvc.getAll().defaultProvider) {
       //  case 'gemini':
       //    return await this.geminiSvc.getSummary(content);
       //  case 'openai':

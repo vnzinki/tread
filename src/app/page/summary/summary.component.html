@@ -2,7 +2,7 @@
   class="px-4 py-2 mb-8 w-[100%] bg-gray-700 text-white rounded-lg hover:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-blue-300"
   (click)="summaryGenerate()"
 >
-  Generate
+  Generate with {{ configSvc.getAll().defaultProvider.toLocaleUpperCase() }}
 </button>
 <div class="bg-white rounded-lg shadow-lg p-8">
   <article

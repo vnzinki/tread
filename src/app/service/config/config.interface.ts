@@ -1,7 +1,8 @@
-type Provider = 'groq' | 'openai' | 'gemini';
+export type Provider = 'groq' | 'openai' | 'gemini';
 
 export interface Config {
-  provider: Provider;
+  defaultProvider: Provider;
+  activeProvider: Provider[];
   openai: {
     model: string;
     api_key: string;
@@ -17,7 +18,8 @@ export interface Config {
 }
 
 export const defaultConfig: Config = {
-  provider: 'groq',
+  defaultProvider: 'groq',
+  activeProvider: [],
   openai: {
     model: 'gpt-3.5-turbo',
     api_key: '',

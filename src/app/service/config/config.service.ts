@@ -1,5 +1,10 @@
 import { Injectable } from '@angular/core';
-import { Config, defaultConfig } from './config.interface';
+import {
+  availableOptions,
+  Config,
+  defaultConfig,
+  Provider,
+} from './config.interface';
 
 @Injectable({
   providedIn: 'root',
@@ -18,8 +23,18 @@ export class ConfigService {
     this.config = config;
   }
 
-  save(value: Config): void {
-    this.storage.setItem(this.configKey, JSON.stringify(value));
+  save(config: Config): void {
+    this.config = config;
+    this.validate();
+    this.storage.setItem(this.configKey, JSON.stringify(this.config));
+  }
+
+  validate(): void {
+    availableOptions.provider.forEach((provider) => {
+      if (this.config[provider as Provider].api_key) {
+        this.config.activeProvider.push(provider as Provider);
+      }
+    });
   }
 
   getAll(): Config {

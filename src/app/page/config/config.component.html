@@ -1,54 +1,74 @@
-<div class="bg-gray-900 p-4 rounded-lg shadow-lg">
-  <form (ngSubmit)="onSubmit()" class="space-y-4">
+<div class="bg-gray-900 text-white p-6 rounded-lg max-w-md">
+  <form (ngSubmit)="onSubmit()">
     <!-- Provider Selection -->
-    <div class="space-x-2">
-      <label for="provider" class="text-white">Provider</label>
+    <div class="mb-6">
+      <label for="provider" class="block text-sm font-medium mb-2"
+        >Provider</label
+      >
       <select
-        class="bg-gray-800 text-white rounded-lg px-4 py-2"
+        class="block w-full bg-gray-800 border border-gray-700 rounded-md py-2 pl-3 pr-10 text-sm appearance-none focus:outline-none focus:ring-2 focus:ring-blue-500"
         name="provider"
-        [(ngModel)]="config.provider"
+        [(ngModel)]="config.defaultProvider"
       >
         @for(provider of availableOptions.provider; track provider) {
         <option [value]="provider" class="bg-gray-700 text-white">
           {{ provider }}
         </option>
         }
+        <span
+          class="material-symbols-outlined absolute right-3 top-2.5 h-5 w-5 text-gray-600 pointer-events-none"
+        >
+          arrow_drop_down
+        </span>
       </select>
     </div>
 
     @for (provider of availableOptions.provider; track provider) { @if
-    (config.provider === provider) {
-    <h4 class="text-white">{{ provider }} Settings</h4>
+    (config.defaultProvider === provider) {
+    <h2 class="text-lg font-semibold mb-4">
+      {{ provider.toUpperCase() }} Settings
+    </h2>
 
-    <div class="space-x-2">
-      <label for="{{ provider }}-model" class="text-white">Model</label>
-      <select
-        class="bg-gray-800 text-white rounded-lg px-4 py-2"
-        name="{{ provider }}-model"
-        [(ngModel)]="config[provider].model"
-      >
-        @for(model of availableOptions[provider].model; track model) {
-        <option [value]="model" class="bg-gray-700 text-white">
-          {{ model }}
-        </option>
-        }
-      </select>
-    </div>
-    <div class="space-x-2">
-      <label for="{{ provider }}-api_key" class="text-white">API Key</label>
-      <input
-        name="{{ provider }}-api_key"
-        [(ngModel)]="config[provider].api_key"
-        class="bg-gray-800 text-white rounded-lg px-4 py-2"
-        placeholder="Enter OpenAI API Key"
-      />
+    <div class="space-y-4">
+      <div>
+        <label for="{{ provider }}-model" class="block text-sm font-medium mb-2"
+          >Model</label
+        >
+        <select
+          class="block w-full bg-gray-800 border border-gray-700 rounded-md py-2 pl-3 pr-10 text-sm appearance-none focus:outline-none focus:ring-2 focus:ring-blue-500"
+          name="{{ provider }}-model"
+          [(ngModel)]="config[provider].model"
+        >
+          @for(model of availableOptions[provider].model; track model) {
+          <option [value]="model" class="bg-gray-700 text-white">
+            {{ model }}
+          </option>
+          }
+          <span class="material-symbols-outlined"> arrow_drop_down </span>
+        </select>
+      </div>
+
+      <div>
+        <label
+          for="{{ provider }}-api_key"
+          class="block text-sm font-medium mb-2"
+          >API Key</label
+        >
+        <input
+          name="{{ provider }}-api_key"
+          [(ngModel)]="config[provider].api_key"
+          class="block w-full bg-gray-800 border border-gray-700 rounded-md py-2 px-3 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+          placeholder="Enter OpenAI API Key"
+          type="password"
+        />
+      </div>
     </div>
     } }
 
     <!-- Submit Button -->
     <button
       type="submit"
-      class="bg-white text-gray-900 rounded-lg px-4 py-2 hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-gray-300"
+      class="w-full bg-white text-black hover:bg-gray-200 font-medium py-2 px-4 mt-12 rounded-md transition duration-150 ease-in-out focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2 focus:ring-offset-black"
     >
       Save Config
     </button>

@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { ConfigService } from '../../service/config/config.service';
 import { SummaryService } from '../../service/summary/summary.service';
 import { TabService } from '../../service/tab/tab.service';
 
@@ -10,13 +11,12 @@ import { TabService } from '../../service/tab/tab.service';
   styleUrl: './summary.component.scss',
 })
 export class SummaryComponent {
-  summaryLength: number = 50;
-  summaryTone: string = 'neutral';
   generatedSummary: string = '';
 
   constructor(
     private tabService: TabService,
-    private summarySvc: SummaryService
+    private summarySvc: SummaryService,
+    public configSvc: ConfigService
   ) {}
 
   async summaryGenerate() {
