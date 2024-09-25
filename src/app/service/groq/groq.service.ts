@@ -11,11 +11,17 @@ export class GroqService {
   constructor(private configSvc: ConfigService) {}
 
   async getSummary(content: string) {
+    const config = this.configSvc.getAll().groq;
+
+    if (!config) {
+      throw new Error('No groq config found');
+    }
+
     const response = await (
       await fetch(this.baseURL + '/chat/completions', {
         method: 'POST',
         headers: {
-          Authorization: `Bearer ${this.configSvc.get('groq')?.api_key}`,
+          Authorization: `Bearer ${config.api_key}`,
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
@@ -27,7 +33,7 @@ export class GroqService {
             },
             { role: 'user', content: content },
           ],
-          model: this.configSvc.getActiveModel(),
+          model: config.model,
         }),
       })
     ).text();

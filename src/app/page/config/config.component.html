@@ -1,14 +1,14 @@
 <div class="bg-gray-900 p-4 rounded-lg shadow-lg">
-  <form [formGroup]="configForm" (ngSubmit)="onSubmit()" class="space-y-4">
+  <form (ngSubmit)="onSubmit()" class="space-y-4">
     <!-- Provider Selection -->
     <div class="space-x-2">
       <label for="provider" class="text-white">Provider</label>
       <select
-        id="provider"
-        formControlName="provider"
         class="bg-gray-800 text-white rounded-lg px-4 py-2"
+        name="provider"
+        [(ngModel)]="config.provider"
       >
-        @for(provider of providers; track provider) {
+        @for(provider of availableOptions.provider; track provider) {
         <option [value]="provider" class="bg-gray-700 text-white">
           {{ provider }}
         </option>
@@ -16,82 +16,39 @@
       </select>
     </div>
 
-    @if (configForm.get('provider')?.value === 'openai') {
-    <h4 class="text-white">OpenAI Settings</h4>
+    @for (provider of availableOptions.provider; track provider) { @if
+    (config.provider === provider) {
+    <h4 class="text-white">{{ provider }} Settings</h4>
+
     <div class="space-x-2">
-      <label for="openai-model" class="text-white">Model</label>
-      <input
-        id="openai-model"
-        formControlName="model"
-        formGroupName="openai"
+      <label for="{{ provider }}-model" class="text-white">Model</label>
+      <select
         class="bg-gray-800 text-white rounded-lg px-4 py-2"
-        placeholder="Enter OpenAI model"
-      />
+        name="{{ provider }}-model"
+        [(ngModel)]="config[provider].model"
+      >
+        @for(model of availableOptions[provider].model; track model) {
+        <option [value]="model" class="bg-gray-700 text-white">
+          {{ model }}
+        </option>
+        }
+      </select>
     </div>
     <div class="space-x-2">
-      <label for="openai-api_key" class="text-white">API Key</label>
+      <label for="{{ provider }}-api_key" class="text-white">API Key</label>
       <input
-        id="openai-api_key"
-        formControlName="api_key"
-        formGroupName="openai"
+        name="{{ provider }}-api_key"
+        [(ngModel)]="config[provider].api_key"
         class="bg-gray-800 text-white rounded-lg px-4 py-2"
         placeholder="Enter OpenAI API Key"
       />
     </div>
-    }
-
-    <!-- GROQ Fields -->
-    @if (configForm.get('provider')?.value === 'groq') {
-    <h4 class="text-white">GROQ Settings</h4>
-    <div class="space-x-2">
-      <label for="groq-model" class="text-white">Model</label>
-      <input
-        id="groq-model"
-        formControlName="model"
-        formGroupName="groq"
-        class="bg-gray-800 text-white rounded-lg px-4 py-2"
-        placeholder="Enter GROQ model"
-      />
-    </div>
-    <div class="space-x-2">
-      <label for="groq-api_key" class="text-white">API Key</label>
-      <input
-        id="groq-api_key"
-        formControlName="api_key"
-        formGroupName="groq"
-        class="bg-gray-800 text-white rounded-lg px-4 py-2"
-        placeholder="Enter GROQ API Key"
-      />
-    </div>
-    } @if (configForm.get('provider')?.value === 'gemini') {
-    <h4 class="text-white">Gemini Settings</h4>
-    <div class="space-x-2">
-      <label for="gemini-model" class="text-white">Model</label>
-      <input
-        id="gemini-model"
-        formControlName="model"
-        formGroupName="gemini"
-        class="bg-gray-800 text-white rounded-lg px-4 py-2"
-        placeholder="Enter Gemini model"
-      />
-    </div>
-    <div class="space-x-2">
-      <label for="gemini-api_key" class="text-white">API Key</label>
-      <input
-        id="gemini-api_key"
-        formControlName="api_key"
-        formGroupName="gemini"
-        class="bg-gray-800 text-white rounded-lg px-4 py-2"
-        placeholder="Enter Gemini API Key"
-      />
-    </div>
-    }
+    } }
 
     <!-- Submit Button -->
     <button
       type="submit"
       class="bg-white text-gray-900 rounded-lg px-4 py-2 hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-gray-300"
-      [disabled]="!configForm.valid"
     >
       Save Config
     </button>

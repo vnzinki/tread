@@ -9,8 +9,15 @@ export class SummaryService {
   constructor(private configSvc: ConfigService, private groqSvc: GroqService) {}
 
   async getSummary(content: string) {
-    return await this.groqSvc.getSummary(
-      content,
-    );
+    switch (this.configSvc.getAll().provider) {
+      //  case 'gemini':
+      //    return await this.geminiSvc.getSummary(content);
+      //  case 'openai':
+      //    return await this.openaiSvc.getSummary(content);
+      case 'groq':
+        return await this.groqSvc.getSummary(content);
+      default:
+        throw new Error('No provider found');
+    }
   }
 }
