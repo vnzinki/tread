@@ -1,4 +1,4 @@
-<div class="bg-gray-900 text-white p-6 rounded-lg max-w-md">
+<div class="bg-gray-900 text-white p-6 rounded-lg">
   <form (ngSubmit)="onSubmit()">
     <!-- Provider Selection -->
     <div class="mb-6">
@@ -58,7 +58,7 @@
           name="{{ provider }}-api_key"
           [(ngModel)]="config[provider].api_key"
           class="block w-full bg-gray-800 border border-gray-700 rounded-md py-2 px-3 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
-          placeholder="Enter OpenAI API Key"
+          placeholder="Enter {{ provider.toUpperCase() }} API Key"
           type="password"
         />
       </div>

@@ -20,6 +20,7 @@ export class SummaryComponent {
   ) {}
 
   async summaryGenerate() {
+    this.generatedSummary = '';
     this.generatedSummary = await this.summarySvc.getSummary(
       await this.tabService.getCurrentTabContent()
     );

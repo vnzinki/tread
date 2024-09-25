@@ -5,8 +5,17 @@
   Generate with {{ configSvc.getAll().defaultProvider.toLocaleUpperCase() }}
 </button>
 <div class="bg-white rounded-lg shadow-lg p-8">
+  @if (generatedSummary && generatedSummary != '') {
   <article
     class="prose lg:prose-lg xl:prose-xl max-w-none"
     [innerHTML]="generatedSummary"
   ></article>
+  } @else {
+  <article class="prose lg:prose-lg xl:prose-xl max-w-none">
+    <div class="w-[80%] h-8 bg-gray-300 rounded mb-2"></div>
+    <div class="w-[100%] h-4 bg-gray-300 rounded mb-2"></div>
+    <div class="w-[60%] h-4 bg-gray-300 rounded mb-2"></div>
+    <div class="w-[90%] h-4 bg-gray-300 rounded mb-2"></div>
+  </article>
+  }
 </div>
