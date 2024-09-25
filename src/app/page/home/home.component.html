@@ -1,36 +1,44 @@
-<div class="fixed top-0 left-0 right-0 flex items-center justify-between p-4">
-  <div class="flex space-x-2 bg-gray-100 p-1 rounded-lg">
+<div
+  class="fixed top-0 left-0 right-0 flex items-center justify-between p-4 pb-0 bg-gray-100"
+>
+  <div class="flex space-x-2">
     <button
-      class="px-4 py-2 text-sm font-medium rounded-md transition-colors duration-150"
+      class="px-4 py-2 text-sm font-medium rounded-t-md transition-colors duration-150 flex items-center text-md"
       [class]="
         activeTab === 'summary'
-          ? 'bg-white text-gray-900 shadow-sm'
+          ? 'bg-white text-gray-900'
           : 'text-gray-500 hover:text-gray-700'
       "
       (click)="activeTab = 'summary'"
     >
-      Summary
+      <span class="material-symbols-outlined mr-1"> settings </span> Summary
     </button>
     <button
-      class="px-4 py-2 text-sm font-medium rounded-md transition-colors duration-150"
+      class="px-4 py-2 text-sm font-medium rounded-t-md transition-colors duration-150 flex items-center text-md"
       [class]="
         activeTab === 'qa'
-          ? 'bg-white text-gray-900 shadow-sm'
+          ? 'bg-white text-gray-900'
           : 'text-gray-500 hover:text-gray-700'
       "
       (click)="activeTab = 'qa'"
     >
-      Q&A
+      <span class="material-symbols-outlined mr-1"> settings </span> Q&A
     </button>
-  </div>
-  <div class="flex">
-    <button (click)="activeTab = 'setting'">
-      <span class="material-symbols-outlined text-4xl"> settings </span>
+    <button
+      class="px-4 py-2 text-sm font-medium rounded-t-md transition-colors duration-150 flex items-center text-md"
+      [class]="
+        activeTab === 'setting'
+          ? 'bg-white text-gray-900'
+          : 'text-gray-500 hover:text-gray-700'
+      "
+      (click)="activeTab = 'setting'"
+    >
+      <span class="material-symbols-outlined mr-1"> settings </span> Setting
     </button>
   </div>
 </div>
 
-<div class="mt-12">
+<div class="mt-14">
   @if (activeTab === 'summary') {
   <app-summary></app-summary>
   } @if (activeTab === 'qa') {
