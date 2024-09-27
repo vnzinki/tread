@@ -1,20 +1,20 @@
-export type Provider = 'groq' | 'openai' | 'gemini';
+export type Provider = 'groq' | 'openai' | 'gemini'
 
 export interface Config {
-  defaultProvider: Provider;
-  activeProvider: Provider[];
+  defaultProvider: Provider
+  activeProvider: Provider[]
   openai: {
-    model: string;
-    api_key: string;
-  };
+    model: string
+    api_key: string
+  }
   groq: {
-    model: string;
-    api_key: string;
-  };
+    model: string
+    api_key: string
+  }
   gemini: {
-    model: string;
-    api_key: string;
-  };
+    model: string
+    api_key: string
+  }
 }
 
 export const defaultConfig: Config = {
@@ -32,7 +32,7 @@ export const defaultConfig: Config = {
     model: 'llama-3.1-8b-instant',
     api_key: '',
   },
-};
+}
 
 export const availableOptions = {
   provider: ['openai', 'groq', 'gemini'],
@@ -66,4 +66,4 @@ export const availableOptions = {
   gemini: {
     model: ['gemini-1.5-flash', 'gemini-1.5-pro', 'gemini-1.0-pro'],
   },
-};
+}

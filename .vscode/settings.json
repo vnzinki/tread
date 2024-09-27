@@ -1,0 +1,21 @@
+{
+  "files.exclude": {
+    "**/.git": true,
+    "**/.svn": true,
+    "**/.hg": true,
+    "**/CVS": true,
+    "**/.DS_Store": true,
+    "**/Thumbs.db": true,
+    "**/__init__.py": true,
+    "**/__pycache__": true,
+    "**/node_modules": true,
+    "node_modules": true,
+    "**/dist": true,
+    "dist": true,
+    "**/.vscode": true,
+    ".vscode": true,
+    "**/.angular": true,
+    ".angular": true
+  },
+  "explorerExclude.backup": {}
+}

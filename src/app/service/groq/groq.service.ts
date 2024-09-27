@@ -1,20 +1,20 @@
-import { Injectable } from '@angular/core';
-import { ConfigService } from '../config/config.service';
-import { GroqResponse } from './groq.response';
+import { Injectable } from '@angular/core'
+import { ConfigService } from '../config/config.service'
+import { GroqResponse } from './groq.response'
 
 @Injectable({
   providedIn: 'root',
 })
 export class GroqService {
-  baseURL = 'https://api.groq.com/openai/v1';
+  baseURL = 'https://api.groq.com/openai/v1'
 
   constructor(private configSvc: ConfigService) {}
 
   async getSummary(content: string) {
-    const config = this.configSvc.getAll().groq;
+    const config = this.configSvc.getAll().groq
 
     if (!config) {
-      throw new Error('No groq config found');
+      throw new Error('No groq config found')
     }
 
     const response = await (
@@ -36,8 +36,8 @@ export class GroqService {
           model: config.model,
         }),
       })
-    ).text();
+    ).text()
 
-    return (JSON.parse(response) as GroqResponse).choices[0].message.content;
+    return (JSON.parse(response) as GroqResponse).choices[0].message.content
   }
 }

@@ -1,7 +1,7 @@
-import { Component } from '@angular/core';
-import { ConfigComponent } from '../config/config.component';
-import { QaComponent } from '../qa/qa.component';
-import { SummaryComponent } from '../summary/summary.component';
+import { Component } from '@angular/core'
+import { ConfigComponent } from '../config/config.component'
+import { QaComponent } from '../qa/qa.component'
+import { SummaryComponent } from '../summary/summary.component'
 
 @Component({
   selector: 'app-home',
@@ -11,5 +11,5 @@ import { SummaryComponent } from '../summary/summary.component';
   styleUrl: './home.component.scss',
 })
 export class HomeComponent {
-  activeTab: string = 'summary';
+  activeTab: string = 'summary'
 }

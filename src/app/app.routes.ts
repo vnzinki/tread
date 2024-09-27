@@ -1,6 +1,6 @@
-import { Routes } from '@angular/router';
-import { ConfigComponent } from './page/config/config.component';
-import { HomeComponent } from './page/home/home.component';
+import { Routes } from '@angular/router'
+import { ConfigComponent } from './page/config/config.component'
+import { HomeComponent } from './page/home/home.component'
 
 export const routes: Routes = [
   {
@@ -8,7 +8,5 @@ export const routes: Routes = [
     component: HomeComponent,
     data: { preload: false },
   },
-  { path: 'config',
-    component: ConfigComponent
-  }
-];
+  { path: 'config', component: ConfigComponent },
+]

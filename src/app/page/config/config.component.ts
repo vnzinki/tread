@@ -1,10 +1,7 @@
-import { Component } from '@angular/core';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import {
-  availableOptions,
-  Config,
-} from '../../service/config/config.interface';
-import { ConfigService } from '../../service/config/config.service';
+import { Component } from '@angular/core'
+import { FormsModule, ReactiveFormsModule } from '@angular/forms'
+import { availableOptions, Config } from '../../service/config/config.interface'
+import { ConfigService } from '../../service/config/config.service'
 
 @Component({
   selector: 'app-config',
@@ -14,17 +11,17 @@ import { ConfigService } from '../../service/config/config.service';
   styleUrl: './config.component.scss',
 })
 export class ConfigComponent {
-  public availableOptions = availableOptions;
-  public config: Config;
+  public availableOptions = availableOptions
+  public config: Config
 
   constructor(private configSvc: ConfigService) {
-    this.config = this.configSvc.getAll();
+    this.config = this.configSvc.getAll()
   }
 
   ngOnInit(): void {}
 
   onSubmit(): void {
-    console.log(this.config);
-    this.configSvc.save(this.config);
+    console.log(this.config)
+    this.configSvc.save(this.config)
   }
 }

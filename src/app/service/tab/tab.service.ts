@@ -1,5 +1,5 @@
-import { Injectable } from '@angular/core';
-import { TabResponse } from './tab.response';
+import { Injectable } from '@angular/core'
+import { TabResponse } from './tab.response'
 
 @Injectable({
   providedIn: 'root',
@@ -12,17 +12,17 @@ export class TabService {
     return new Promise((resolve, reject) => {
       chrome.runtime.sendMessage({ action: 'injectScript' }, (response) => {
         if (response && response.status === 'scriptInjected') {
-          resolve(response);
+          resolve(response)
         } else {
-          reject('Failed to inject content script');
+          reject('Failed to inject content script')
         }
-      });
-    });
+      })
+    })
   }
 
   async getCurrentTabContent() {
-    const activeTabId = await this.getActiveTab();
-    return (await this.getTabContent(activeTabId))?.bodyText || '';
+    const activeTabId = await this.getActiveTab()
+    return (await this.getTabContent(activeTabId))?.bodyText || ''
   }
 
   async getActiveTab() {
@@ -30,15 +30,15 @@ export class TabService {
       chrome.tabs.query({ active: true, currentWindow: true }, (tabs) =>
         chrome.runtime.lastError
           ? reject(chrome.runtime.lastError)
-          : resolve(tabs)
-      )
-    );
+          : resolve(tabs),
+      ),
+    )
 
-    return tabs[0]?.id;
+    return tabs[0]?.id
   }
 
   async getTabContent(activeTabId?: number) {
-    if (!activeTabId) return;
+    if (!activeTabId) return
 
     // Send a message to the content script to retrieve tab content
     const response = await new Promise<TabResponse>((resolve, reject) =>
@@ -48,10 +48,10 @@ export class TabService {
         (response) =>
           chrome.runtime.lastError
             ? reject(chrome.runtime.lastError)
-            : resolve(response)
-      )
-    );
+            : resolve(response),
+      ),
+    )
 
-    return response;
+    return response
   }
 }
