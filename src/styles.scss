@@ -3,14 +3,15 @@
 @tailwind utilities;
 
 article.prose {
-  font-family: "Merriweather", Georgia, serif;
+  font-family: 'Merriweather', Georgia, serif;
   font-size: 14px;
   line-height: 1.5;
   color: #333;
 }
 
-article.prose p {
-  margin-bottom: 1.5em;
+article.prose p,
+article.prose li {
+  margin-bottom: 1em;
 }
 
 article.prose h1,

@@ -21,7 +21,6 @@ export class ConfigComponent {
   ngOnInit(): void {}
 
   onSubmit(): void {
-    console.log(this.config)
     this.configSvc.save(this.config)
   }
 }

@@ -22,7 +22,8 @@ export class TabService {
 
   async getCurrentTabContent() {
     const activeTabId = await this.getActiveTab()
-    return (await this.getTabContent(activeTabId))?.bodyText || ''
+    const currentTabData = await this.getTabContent(activeTabId)
+    return currentTabData?.html
   }
 
   async getActiveTab() {
