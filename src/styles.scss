@@ -54,3 +54,8 @@ article.prose blockquote {
   padding-left: 1em;
   font-style: italic;
 }
+
+article.prose code,
+article.prose mark {
+  @apply rounded-[0.375rem] border bg-gray-100 px-[0.25rem] py-[0.15rem] font-mono text-xs font-normal before:hidden after:hidden;
+}
