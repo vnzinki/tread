@@ -1,5 +1,6 @@
 import { Component } from '@angular/core'
 import { Readability } from '@mozilla/readability'
+import { Provider } from '../../service/config/config.interface'
 import { ConfigService } from '../../service/config/config.service'
 import { SummaryService } from '../../service/summary/summary.service'
 import { TabService } from '../../service/tab/tab.service'
@@ -12,7 +13,9 @@ import { TabService } from '../../service/tab/tab.service'
   styleUrl: './summary.component.scss',
 })
 export class SummaryComponent {
+  dropdownOpen = false
   generatedSummary: string = ''
+  generatingSummary = false
 
   constructor(
     private tabService: TabService,
@@ -20,7 +23,9 @@ export class SummaryComponent {
     public configSvc: ConfigService,
   ) {}
 
-  async summaryGenerate() {
+  async summaryGenerate(provider: Provider) {
+    this.dropdownOpen = false
+    this.generatingSummary = true
     this.generatedSummary = ''
 
     const tabHtml = await this.tabService.getCurrentTabContent()
@@ -33,7 +38,25 @@ export class SummaryComponent {
     if (!tabContent) return
 
     this.generatedSummary = await this.summarySvc.getSummary(
+      provider,
       tabContent.textContent,
     )
+    this.generatingSummary = false
+  }
+
+  availableProvider() {
+    return this.configSvc
+      .getAll()
+      .activeProvider.filter(
+        (provider) => provider !== this.configSvc.getAll().defaultProvider,
+      )
+  }
+
+  toggleDropdown() {
+    this.dropdownOpen = !this.dropdownOpen
+  }
+
+  closeDropdown() {
+    this.dropdownOpen = false
   }
 }

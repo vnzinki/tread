@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core'
+import { Provider } from '../config/config.interface'
 import { ConfigService } from '../config/config.service'
 import { GeminiService } from '../gemini/gemini.service'
 import { GroqService } from '../groq/groq.service'
@@ -15,8 +16,8 @@ export class SummaryService {
     private openaiSvc: OpenAiService,
   ) {}
 
-  async getSummary(content: string) {
-    switch (this.configSvc.getAll().defaultProvider) {
+  async getSummary(provider: Provider, content: string) {
+    switch (provider) {
       case 'gemini':
         return await this.geminiSvc.getSummary(content)
       case 'openai':

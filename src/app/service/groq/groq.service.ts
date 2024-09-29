@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core'
 import { ConfigService } from '../config/config.service'
-import { GroqResponse } from './groq.response'
+import { OpenAiResponse } from '../openai/openai.response'
 
 @Injectable({
   providedIn: 'root',
@@ -38,6 +38,6 @@ export class GroqService {
       })
     ).text()
 
-    return (JSON.parse(response) as GroqResponse).choices[0].message.content
+    return (JSON.parse(response) as OpenAiResponse).choices[0].message.content
   }
 }

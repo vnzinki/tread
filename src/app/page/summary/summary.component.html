@@ -1,11 +1,43 @@
-<button
-  class="px-4 py-2 mb-4 w-[100%] bg-gray-700 text-white rounded-lg hover:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-blue-300"
-  (click)="summaryGenerate()"
->
-  Generate with {{ configSvc.getAll().defaultProvider.toLocaleUpperCase() }}
-</button>
+<div class="relative flex mb-4" x-data="{dropdownOpen: false}">
+  <button
+    class="bg-black flex-grow hover:bg-gray-800 text-white font-semibold py-2 px-4 rounded-l focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-opacity-50"
+    (click)="summaryGenerate(configSvc.getAll().defaultProvider)"
+  >
+    Generate with {{ configSvc.getAll().defaultProvider.toLocaleUpperCase() }}
+  </button>
+  <button
+    class="bg-black hover:bg-gray-800 text-white font-semibold py-2 px-2 rounded-r border-l border-gray-700 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-opacity-50"
+    (click)="toggleDropdown()"
+  >
+    <span class="material-symbols-outlined"> arrow_drop_down </span>
+  </button>
+
+  @if (dropdownOpen) {
+    <div
+      class="absolute right-0 mt-10 w-48 bg-white rounded-md shadow-lg text-left"
+      (clickOutside)="closeDropdown()"
+    >
+      <div class="py-1">
+        @for (provider of availableProvider(); track provider) {
+          <button
+            class="w-full block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+            (click)="summaryGenerate(provider)"
+          >
+            Summary with {{ provider.toUpperCase() }}
+          </button>
+        }
+        <hr class="my-1 border-gray-200" />
+        <button
+          class="w-full block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+        >
+          Change default provider
+        </button>
+      </div>
+    </div>
+  }
+</div>
 <div class="bg-white rounded-lg shadow-lg p-4">
-  @if (generatedSummary && generatedSummary != '') {
+  @if (!generatingSummary) {
     <article
       class="prose lg:prose-lg xl:prose-xl max-w-none"
       [innerHTML]="generatedSummary"
