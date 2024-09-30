@@ -7,17 +7,22 @@ export interface Config {
     enable: boolean
     defaultLanguage: string
   }
-  openai: {
-    model: string
-    api_key: string
-  }
-  groq: {
-    model: string
-    api_key: string
-  }
-  gemini: {
-    model: string
-    api_key: string
+  providers: {
+    openai: {
+      enable: boolean
+      model: string
+      api_key: string
+    }
+    groq: {
+      enable: boolean
+      model: string
+      api_key: string
+    }
+    gemini: {
+      enable: boolean
+      model: string
+      api_key: string
+    }
   }
 }
 
@@ -28,22 +33,27 @@ export const defaultConfig: Config = {
     enable: true,
     defaultLanguage: 'Vietnamese',
   },
-  openai: {
-    model: 'gpt-3.5-turbo',
-    api_key: '',
-  },
-  groq: {
-    model: 'llama3-groq-8b-8192-tool-use-preview',
-    api_key: '',
-  },
-  gemini: {
-    model: 'llama-3.1-8b-instant',
-    api_key: '',
+  providers: {
+    openai: {
+      enable: false,
+      model: 'gpt-3.5-turbo',
+      api_key: '',
+    },
+    groq: {
+      enable: false,
+      model: 'llama3-groq-8b-8192-tool-use-preview',
+      api_key: '',
+    },
+    gemini: {
+      enable: false,
+      model: 'llama-3.1-8b-instant',
+      api_key: '',
+    },
   },
 }
 
 export const availableOptions = {
-  provider: ['openai', 'groq', 'gemini'],
+  provider: ['openai', 'groq', 'gemini'] as Provider[],
   availableLanguages: ['Vietnamese', 'English'],
   groq: {
     model: [

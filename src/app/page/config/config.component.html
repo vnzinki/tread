@@ -1,8 +1,7 @@
 <div class="bg-gray-900 text-white p-6 rounded-lg">
   <form (ngSubmit)="onSubmit()">
-    <!-- Provider Selection -->
     <div class="my-6">
-      <h2 class="text-lg font-semibold mb-4">Provider</h2>
+      <h2 class="text-lg font-semibold mb-4">Default Provider</h2>
       <select
         class="block w-full bg-gray-800 border border-gray-700 rounded-md py-2 pl-3 pr-10 text-sm appearance-none focus:outline-none focus:ring-2 focus:ring-blue-500"
         name="provider"
@@ -22,48 +21,57 @@
     </div>
 
     @for (provider of availableOptions.provider; track provider) {
-      @if (config.defaultProvider === provider) {
+      <div class="flex">
+        <input
+          type="checkbox"
+          class="flex h-4 w-4 rounded text-blue-600 focus:ring-blue-500 border-gray-300"
+          [checked]="config.providers[provider].enable"
+          (change)="
+            config.providers[provider].enable =
+              !config.providers[provider].enable
+          "
+        />
         <h2 class="text-lg font-semibold mb-4">
           {{ provider.toUpperCase() }} Settings
         </h2>
+      </div>
 
-        <div class="space-y-4">
-          <div>
-            <label
-              for="{{ provider }}-model"
-              class="block text-sm font-medium mb-2"
-              >Model</label
-            >
-            <select
-              class="block w-full bg-gray-800 border border-gray-700 rounded-md py-2 pl-3 pr-10 text-sm appearance-none focus:outline-none focus:ring-2 focus:ring-blue-500"
-              name="{{ provider }}-model"
-              [(ngModel)]="config[provider].model"
-            >
-              @for (model of availableOptions[provider].model; track model) {
-                <option [value]="model" class="bg-gray-700 text-white">
-                  {{ model }}
-                </option>
-              }
-              <span class="material-symbols-outlined"> arrow_drop_down </span>
-            </select>
-          </div>
-
-          <div>
-            <label
-              for="{{ provider }}-api_key"
-              class="block text-sm font-medium mb-2"
-              >API Key</label
-            >
-            <input
-              name="{{ provider }}-api_key"
-              [(ngModel)]="config[provider].api_key"
-              class="block w-full bg-gray-800 border border-gray-700 rounded-md py-2 px-3 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
-              placeholder="Enter {{ provider.toUpperCase() }} API Key"
-              type="password"
-            />
-          </div>
+      <div class="space-y-4">
+        <div>
+          <label
+            for="{{ provider }}-model"
+            class="block text-sm font-medium mb-2"
+            >Model</label
+          >
+          <select
+            class="block w-full bg-gray-800 border border-gray-700 rounded-md py-2 pl-3 pr-10 text-sm appearance-none focus:outline-none focus:ring-2 focus:ring-blue-500"
+            name="{{ provider }}-model"
+            [(ngModel)]="config.providers[provider].model"
+          >
+            @for (model of availableOptions[provider].model; track model) {
+              <option [value]="model" class="bg-gray-700 text-white">
+                {{ model }}
+              </option>
+            }
+            <span class="material-symbols-outlined"> arrow_drop_down </span>
+          </select>
         </div>
-      }
+
+        <div>
+          <label
+            for="{{ provider }}-api_key"
+            class="block text-sm font-medium mb-2"
+            >API Key</label
+          >
+          <input
+            name="{{ provider }}-api_key"
+            [(ngModel)]="config.providers[provider].api_key"
+            class="block w-full bg-gray-800 border border-gray-700 rounded-md py-2 px-3 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+            placeholder="Enter {{ provider.toUpperCase() }} API Key"
+            type="password"
+          />
+        </div>
+      </div>
     }
 
     <div class="my-6">

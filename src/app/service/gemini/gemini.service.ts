@@ -32,9 +32,9 @@ export class GeminiService {
       await fetch(
         this.baseURL +
           '/models/' +
-          config[this.providerName].model +
+          config.providers[this.providerName].model +
           ':generateContent?key=' +
-          config[this.providerName].api_key,
+          config.providers[this.providerName].api_key,
         {
           method: 'POST',
           headers: {

@@ -32,7 +32,7 @@ export class ConfigService {
   validate(): void {
     this.config.activeProvider = []
     availableOptions.provider.forEach((provider) => {
-      if (this.config[provider as Provider]?.api_key) {
+      if (this.config.providers[provider as Provider]?.api_key) {
         this.config.activeProvider.push(provider as Provider)
       }
     })
