@@ -3,6 +3,10 @@ export type Provider = 'groq' | 'openai' | 'gemini'
 export interface Config {
   defaultProvider: Provider
   activeProvider: Provider[]
+  translate: {
+    enable: boolean
+    defaultLanguage: string
+  }
   openai: {
     model: string
     api_key: string
@@ -20,6 +24,10 @@ export interface Config {
 export const defaultConfig: Config = {
   defaultProvider: 'groq',
   activeProvider: [],
+  translate: {
+    enable: true,
+    defaultLanguage: 'Vietnamese',
+  },
   openai: {
     model: 'gpt-3.5-turbo',
     api_key: '',
@@ -36,6 +44,7 @@ export const defaultConfig: Config = {
 
 export const availableOptions = {
   provider: ['openai', 'groq', 'gemini'],
+  availableLanguages: ['Vietnamese', 'English'],
   groq: {
     model: [
       'distil-whisper-large-v3-en',

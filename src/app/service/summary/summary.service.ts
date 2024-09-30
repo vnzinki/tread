@@ -1,16 +1,16 @@
 import { Injectable } from '@angular/core'
 import { Provider } from '../config/config.interface'
-import { ConfigService } from '../config/config.service'
 import { GeminiService } from '../gemini/gemini.service'
 import { GroqService } from '../groq/groq.service'
 import { OpenAiService } from '../openai/openai.service'
+import { Config } from 'prettier'
+import { ConfigService } from '../config/config.service'
 
 @Injectable({
   providedIn: 'root',
 })
 export class SummaryService {
   constructor(
-    private configSvc: ConfigService,
     private groqSvc: GroqService,
     private geminiSvc: GeminiService,
     private openaiSvc: OpenAiService,
