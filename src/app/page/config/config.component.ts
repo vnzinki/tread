@@ -1,5 +1,6 @@
-import { Component } from '@angular/core'
+import { Component, signal } from '@angular/core'
 import { FormsModule, ReactiveFormsModule } from '@angular/forms'
+import { Toast } from '../../block/toast/toast.interface'
 import { availableOptions, Config } from '../../service/config/config.interface'
 import { ConfigService } from '../../service/config/config.service'
 
@@ -22,5 +23,9 @@ export class ConfigComponent {
 
   onSubmit(): void {
     this.configSvc.save(this.config)
+  }
+
+  activeProvider() {
+    return this.configSvc.availableProviders()
   }
 }

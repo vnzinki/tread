@@ -1,114 +1,154 @@
-<div class="bg-gray-900 text-white p-6 rounded-lg">
+<div class="bg-gray-900 text-white rounded-md pb-8">
   <form (ngSubmit)="onSubmit()">
-    <div class="my-6">
-      <h2 class="text-lg font-semibold mb-4">Default Provider</h2>
+    <div class="flex items-center justify-between p-6">
+      <label for="default-provider" class="text-base text-white pr-8"
+        >Default Provider</label
+      >
       <select
-        class="block w-full bg-gray-800 border border-gray-700 rounded-md py-2 pl-3 pr-10 text-sm appearance-none focus:outline-none focus:ring-2 focus:ring-blue-500"
+        id="default-provider"
+        class="flex-grow bg-gray-700 text-white rounded px-3 py-2"
         name="provider"
+        [disabled]="activeProvider().length === 0"
         [(ngModel)]="config.defaultProvider"
       >
-        @for (provider of availableOptions.provider; track provider) {
-          <option [value]="provider" class="bg-gray-700 text-white">
+        @for (provider of activeProvider(); track provider) {
+          <option
+            [value]="provider"
+            [selected]="provider === config.defaultProvider"
+          >
             {{ provider }}
           </option>
         }
-        <span
-          class="material-symbols-outlined absolute right-3 top-2.5 h-5 w-5 text-gray-600 pointer-events-none"
-        >
-          arrow_drop_down
-        </span>
+
+        @if (activeProvider().length === 0) {
+          <option value="none">No available provider</option>
+        }
       </select>
     </div>
 
     @for (provider of availableOptions.provider; track provider) {
-      <div class="flex">
-        <input
-          type="checkbox"
-          class="flex h-4 w-4 rounded text-blue-600 focus:ring-blue-500 border-gray-300"
-          [checked]="config.providers[provider].enable"
-          (change)="
+      <div class="m-2 p-4 hover:bg-gray-800 rounded-md">
+        <div
+          class="inline-flex items-center cursor-pointer"
+          (click)="
             config.providers[provider].enable =
               !config.providers[provider].enable
           "
-        />
-        <h2 class="text-lg font-semibold mb-4">
-          {{ provider.toUpperCase() }} Settings
-        </h2>
-      </div>
-
-      <div class="space-y-4">
-        <div>
-          <label
-            for="{{ provider }}-model"
-            class="block text-sm font-medium mb-2"
-            >Model</label
+        >
+          <input
+            id="{{ provider }}-enable"
+            type="checkbox"
+            class="sr-only peer"
+            [checked]="config.providers[provider].enable"
+          />
+          <div
+            class="relative w-11 h-6 pr-2 bg-gray-200 rounded-full peer peer-focus:ring-4 peer-focus:ring-blue-300 dark:peer-focus:ring-blue-800 dark:bg-gray-700 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-blue-600"
+          ></div>
+          <span
+            class="ms-3 text-sm font-medium text-gray-900 dark:text-gray-300 cursor-pointer"
           >
-          <select
-            class="block w-full bg-gray-800 border border-gray-700 rounded-md py-2 pl-3 pr-10 text-sm appearance-none focus:outline-none focus:ring-2 focus:ring-blue-500"
-            name="{{ provider }}-model"
-            [(ngModel)]="config.providers[provider].model"
-          >
-            @for (model of availableOptions[provider].model; track model) {
-              <option [value]="model" class="bg-gray-700 text-white">
-                {{ model }}
-              </option>
-            }
-            <span class="material-symbols-outlined"> arrow_drop_down </span>
-          </select>
+            {{ provider.toUpperCase() }} Settings
+          </span>
         </div>
 
-        <div>
-          <label
-            for="{{ provider }}-api_key"
-            class="block text-sm font-medium mb-2"
-            >API Key</label
-          >
-          <input
-            name="{{ provider }}-api_key"
-            [(ngModel)]="config.providers[provider].api_key"
-            class="block w-full bg-gray-800 border border-gray-700 rounded-md py-2 px-3 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
-            placeholder="Enter {{ provider.toUpperCase() }} API Key"
-            type="password"
-          />
+        <div
+          class="space-y-4 overflow-hidden transition-all duration-150 ease-in-out"
+          [class]="config.providers[provider].enable ? 'h-auto' : 'h-0'"
+        >
+          <div class="pt-4">
+            <label
+              for="{{ provider }}-model"
+              class="block text-sm font-medium mb-2"
+              >Model</label
+            >
+            <select
+              class="block w-full bg-gray-800 border border-gray-700 rounded-md py-2 pl-3 pr-10 text-sm appearance-none focus:outline-none focus:ring-2 focus:ring-blue-500"
+              name="{{ provider }}-model"
+              [(ngModel)]="config.providers[provider].model"
+            >
+              @for (model of availableOptions[provider].model; track model) {
+                <option [value]="model" class="bg-gray-700 text-white">
+                  {{ model }}
+                </option>
+              }
+              <span class="material-symbols-outlined"> arrow_drop_down </span>
+            </select>
+          </div>
+
+          <div>
+            <label
+              for="{{ provider }}-api_key"
+              class="block text-sm font-medium mb-2"
+              >API Key</label
+            >
+            <input
+              name="{{ provider }}-api_key"
+              [(ngModel)]="config.providers[provider].api_key"
+              class="block w-full bg-gray-800 border border-gray-700 rounded-md py-2 px-3 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+              placeholder="Enter {{ provider.toUpperCase() }} API Key"
+              type="password"
+            />
+          </div>
         </div>
       </div>
     }
 
-    <div class="my-6">
-      <div class="flex">
-        <input
-          type="checkbox"
-          class="flex h-4 w-4 rounded text-blue-600 focus:ring-blue-500 border-gray-300"
-          [checked]="config.translate.enable"
-          (change)="config.translate.enable = !config.translate.enable"
-        />
-        <h2 class="flex-grow text-lg font-semibold mb-4">Enable Translate</h2>
-      </div>
-      <p>Try to translate summary to target language</p>
-      <select
-        class="block w-full bg-gray-800 border border-gray-700 rounded-md py-2 pl-3 pr-10 text-sm appearance-none focus:outline-none focus:ring-2 focus:ring-blue-500"
-        name="provider"
-        [(ngModel)]="config.translate.defaultLanguage"
+    <div class="m-2 p-4 hover:bg-gray-800 rounded-md">
+      <div
+        class="inline-flex items-center cursor-pointer"
+        (click)="config.translate.enable = !config.translate.enable"
       >
-        @for (language of availableOptions.availableLanguages; track language) {
-          <option [value]="language" class="bg-gray-700 text-white">
-            {{ language }}
-          </option>
-        }
+        <input
+          id="translate-enable"
+          type="checkbox"
+          class="sr-only peer"
+          [checked]="config.translate.enable"
+        />
+        <div
+          class="relative w-11 h-6 pr-2 bg-gray-200 rounded-full peer peer-focus:ring-4 peer-focus:ring-blue-300 dark:peer-focus:ring-blue-800 dark:bg-gray-700 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-blue-600"
+        ></div>
         <span
-          class="material-symbols-outlined absolute right-3 top-2.5 h-5 w-5 text-gray-600 pointer-events-none"
+          for="translate-enable"
+          class="ms-3 text-sm font-medium text-gray-900 dark:text-gray-300"
+          >Enable Translate</span
         >
-          arrow_drop_down
-        </span>
-      </select>
+      </div>
+      <div
+        class="space-y-4 overflow-hidden transition-all duration-150 ease-in-out"
+        [class]="config.translate.enable ? 'h-auto' : 'h-0'"
+      >
+        <div class="pt-4">
+          <select
+            class="block w-full bg-gray-800 border border-gray-700 rounded-md py-2 pl-3 pr-10 text-sm appearance-none focus:outline-none focus:ring-2 focus:ring-blue-500"
+            name="provider"
+            [(ngModel)]="config.translate.defaultLanguage"
+          >
+            @for (
+              language of availableOptions.availableLanguages;
+              track language
+            ) {
+              <option [value]="language" class="bg-gray-700 text-white">
+                {{ language }}
+              </option>
+            }
+            <span
+              class="material-symbols-outlined absolute right-3 top-2.5 h-5 w-5 text-gray-600 pointer-events-none"
+            >
+              arrow_drop_down
+            </span>
+          </select>
+        </div>
+      </div>
     </div>
 
     <!-- Submit Button -->
-    <button
-      type="submit"
-      class="w-full bg-white text-black hover:bg-gray-200 font-medium py-2 px-4 mt-12 rounded-md transition duration-150 ease-in-out focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2 focus:ring-offset-black"
-    >
-      Save Config
-    </button>
+    <div class="px-6">
+      <button
+        type="submit"
+        class="w-full bg-white text-black hover:bg-gray-200 font-medium py-2 px-4 mt-12 rounded-md transition duration-150 ease-in-out focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2 focus:ring-offset-black"
+      >
+        Save Config
+      </button>
+    </div>
   </form>
 </div>

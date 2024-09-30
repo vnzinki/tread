@@ -1,4 +1,5 @@
-import { Injectable } from '@angular/core'
+import { Injectable, signal } from '@angular/core'
+import { Toast } from '../../block/toast/toast.interface'
 import { Config, defaultConfig, Provider } from './config.interface'
 
 @Injectable({
@@ -8,6 +9,12 @@ export class ConfigService {
   private storage = window.localStorage
   private configKey = 'treadConfig'
   private config
+
+  public toast$ = signal<Toast>({
+    show: false,
+    message: '',
+    type: 'success',
+  })
 
   constructor() {
     let config = defaultConfig
@@ -34,5 +41,23 @@ export class ConfigService {
     return Object.keys(this.getAll().providers).filter(
       (provider) => this.getAll().providers[provider as Provider].enable,
     ) as Provider[]
+  }
+
+  showToast(
+    type: 'success' | 'loading' | 'error',
+    message: string,
+    duration = 0,
+  ) {
+    this.toast$.set({ show: true, type, message })
+
+    if (duration > 0) {
+      setTimeout(() => {
+        this.toast$.set({ show: false, type: 'success', message: '' })
+      }, 3000)
+    }
+  }
+
+  killToast() {
+    this.toast$.set({ show: false, type: 'success', message: '' })
   }
 }

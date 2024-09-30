@@ -1,4 +1,4 @@
-import { Component } from '@angular/core'
+import { Component, ElementRef, Renderer2, ViewChild } from '@angular/core'
 import { Readability } from '@mozilla/readability'
 import { Provider } from '../../service/config/config.interface'
 import { ConfigService } from '../../service/config/config.service'
@@ -17,16 +17,27 @@ export class SummaryComponent {
   generatedSummary: string = ''
   generatingSummary = false
 
+  @ViewChild('dropdownMenu')
+  dropdownMenu!: ElementRef
+
   constructor(
+    private renderer: Renderer2,
     private tabService: TabService,
     private summarySvc: SummaryService,
     public configSvc: ConfigService,
-  ) {}
+  ) {
+    this.renderer.listen('window', 'click', (event) => {
+      if (!this.dropdownMenu.nativeElement.contains(event.target)) {
+        this.dropdownOpen = false
+      }
+    })
+  }
 
   async summaryGenerate(provider: Provider) {
     this.dropdownOpen = false
     this.generatingSummary = true
     this.generatedSummary = ''
+    this.configSvc.showToast('loading', 'Generating summary...')
 
     const tabHtml = await this.tabService.getCurrentTabContent()
     if (!tabHtml) return
@@ -42,6 +53,7 @@ export class SummaryComponent {
       tabContent.textContent,
     )
     this.generatingSummary = false
+    this.configSvc.killToast()
   }
 
   availableProvider() {

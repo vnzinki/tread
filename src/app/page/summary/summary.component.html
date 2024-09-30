@@ -14,8 +14,8 @@
 
   @if (dropdownOpen) {
     <div
+      #dropdownMenu
       class="absolute right-0 mt-10 w-48 bg-white rounded-md shadow-lg text-left"
-      (clickOutside)="closeDropdown()"
     >
       <div class="py-1">
         @for (provider of availableProvider(); track provider) {
@@ -44,6 +44,10 @@
     ></article>
   } @else {
     <article class="prose lg:prose-lg xl:prose-xl max-w-none">
+      <div class="w-[80%] h-8 bg-gray-300 rounded mb-2"></div>
+      <div class="w-[100%] h-4 bg-gray-300 rounded mb-2"></div>
+      <div class="w-[60%] h-4 bg-gray-300 rounded mb-2"></div>
+      <div class="w-[90%] h-4 bg-gray-300 rounded mb-2"></div>
       <div class="w-[80%] h-8 bg-gray-300 rounded mb-2"></div>
       <div class="w-[100%] h-4 bg-gray-300 rounded mb-2"></div>
       <div class="w-[60%] h-4 bg-gray-300 rounded mb-2"></div>
