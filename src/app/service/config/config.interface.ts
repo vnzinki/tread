@@ -2,7 +2,6 @@ export type Provider = 'groq' | 'openai' | 'gemini'
 
 export interface Config {
   defaultProvider: Provider
-  activeProvider: Provider[]
   translate: {
     enable: boolean
     defaultLanguage: string
@@ -28,7 +27,6 @@ export interface Config {
 
 export const defaultConfig: Config = {
   defaultProvider: 'groq',
-  activeProvider: [],
   translate: {
     enable: true,
     defaultLanguage: 'Vietnamese',

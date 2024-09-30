@@ -45,14 +45,11 @@ export class SummaryComponent {
   }
 
   availableProvider() {
-    return Object.keys(this.configSvc.getAll().providers)
-      .filter(
-        (provider) =>
-          this.configSvc.getAll().providers[provider as Provider].enable,
-      )
+    return this.configSvc
+      .availableProviders()
       .filter(
         (provider) => provider !== this.configSvc.getAll().defaultProvider,
-      )
+      ) as Provider[]
   }
 
   toggleDropdown() {

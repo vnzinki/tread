@@ -1,10 +1,5 @@
 import { Injectable } from '@angular/core'
-import {
-  availableOptions,
-  Config,
-  defaultConfig,
-  Provider,
-} from './config.interface'
+import { Config, defaultConfig, Provider } from './config.interface'
 
 @Injectable({
   providedIn: 'root',
@@ -29,16 +24,15 @@ export class ConfigService {
     this.storage.setItem(this.configKey, JSON.stringify(this.config))
   }
 
-  validate(): void {
-    this.config.activeProvider = []
-    availableOptions.provider.forEach((provider) => {
-      if (this.config.providers[provider as Provider]?.api_key) {
-        this.config.activeProvider.push(provider as Provider)
-      }
-    })
-  }
+  validate(): void {}
 
   getAll(): Config {
     return this.config
+  }
+
+  availableProviders() {
+    return Object.keys(this.getAll().providers).filter(
+      (provider) => this.getAll().providers[provider as Provider].enable,
+    ) as Provider[]
   }
 }
