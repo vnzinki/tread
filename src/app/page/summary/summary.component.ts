@@ -50,6 +50,7 @@ export class SummaryComponent {
     this.configSvc.showToast('loading', 'Generating summary...')
 
     const tabHtml = (await this.tabService.getCurrentTabContent())?.html
+    console.log(tabHtml)
     if (!tabHtml) {
       this.configSvc.showToast('error', 'Failed to get tab content', 3000)
       return
@@ -61,6 +62,15 @@ export class SummaryComponent {
     const tabContent = new Readability(tabDoc).parse()
     if (!tabContent) {
       this.configSvc.showToast('error', 'Failed to parse tab content', 3000)
+      return
+    }
+
+    if (tabContent.textContent.includes('protected by reCAPTCHA')) {
+      this.configSvc.showToast(
+        'error',
+        'Webpage prevent getting contents, please try again',
+        3000,
+      )
       return
     }
 

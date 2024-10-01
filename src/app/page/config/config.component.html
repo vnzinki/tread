@@ -48,6 +48,21 @@
             class="ms-3 text-sm font-medium text-gray-900 dark:text-gray-300 cursor-pointer"
           >
             {{ provider.toUpperCase() }} Settings
+            <div class="inline-block">
+              <span
+                class="material-symbols-outlined text-sm cursor-pointer peer"
+                [routerLink]="['/info']"
+              >
+                info
+              </span>
+              <div
+                id="{{ provider }}-tooltip"
+                role="tooltip"
+                class="hidden absolute z-10 p-2 text-sm text-white bg-gray-700 rounded-md peer-hover:block"
+              >
+                How to get {{ provider.toUpperCase() }} API Key?
+              </div>
+            </div>
           </span>
         </div>
 
@@ -112,6 +127,20 @@
           class="ms-3 text-sm font-medium text-gray-900 dark:text-gray-300"
           >Enable Translate</span
         >
+        <div class="inline-block pl-1">
+          <span
+            class="material-symbols-outlined text-sm cursor-pointer peer"
+            [routerLink]="['/info']"
+          >
+            info
+          </span>
+          <div
+            role="tooltip"
+            class="hidden absolute z-10 p-2 text-sm text-white bg-gray-700 rounded-md peer-hover:block"
+          >
+            What is translate?
+          </div>
+        </div>
       </div>
       <div
         class="space-y-4 overflow-hidden transition-all duration-150 ease-in-out"

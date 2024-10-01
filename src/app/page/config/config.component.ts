@@ -1,13 +1,13 @@
-import { Component, signal } from '@angular/core'
+import { Component } from '@angular/core'
 import { FormsModule, ReactiveFormsModule } from '@angular/forms'
-import { Toast } from '../../block/toast/toast.interface'
+import { RouterLink } from '@angular/router'
 import { availableOptions, Config } from '../../service/config/config.interface'
 import { ConfigService } from '../../service/config/config.service'
 
 @Component({
   selector: 'app-config',
   standalone: true,
-  imports: [FormsModule, ReactiveFormsModule],
+  imports: [FormsModule, ReactiveFormsModule, RouterLink],
   templateUrl: './config.component.html',
   styleUrl: './config.component.scss',
 })
