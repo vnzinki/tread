@@ -40,7 +40,7 @@
   @if (!generatingSummary) {
     <article
       class="prose lg:prose-lg xl:prose-xl max-w-none"
-      [innerHTML]="generatedSummary"
+      [innerHTML]="generatedSummary$()"
     ></article>
   } @else {
     <article class="prose lg:prose-lg xl:prose-xl max-w-none">

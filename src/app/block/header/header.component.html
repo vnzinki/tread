@@ -1,0 +1,40 @@
+<div class="flex space-x-2">
+  <button
+    class="px-4 py-2 text-sm font-medium rounded-t-md transition-colors duration-150 flex items-center text-md"
+    [routerLink]="['/']"
+    [routerLinkActiveOptions]="{ exact: true }"
+    routerLinkActive="bg-white text-gray-900"
+  >
+    <span class="material-symbols-outlined mr-1"> summarize </span> Summary
+  </button>
+  <!-- <button
+    class="px-4 py-2 text-sm font-medium rounded-t-md transition-colors duration-150 flex items-center text-md"
+    [routerLink]="['/related']"
+    routerLinkActive="bg-white text-gray-900"
+  >
+    <span class="material-symbols-outlined mr-2"> list </span>
+    Related
+  </button>
+  <button
+    class="px-4 py-2 text-sm font-medium rounded-t-md transition-colors duration-150 flex items-center text-md"
+    [routerLink]="['/qa']"
+    routerLinkActive="bg-white text-gray-900"
+  >
+    <span class="material-symbols-outlined mr-2"> question_exchange </span>
+    Q&A
+  </button> -->
+  <button
+    class="px-4 py-2 text-sm font-medium rounded-t-md transition-colors duration-150 flex items-center text-md"
+    [routerLink]="['/config']"
+    routerLinkActive="bg-white text-gray-900"
+  >
+    <span class="material-symbols-outlined mr-1"> settings </span> Setting
+  </button>
+  <button
+    class="px-4 py-2 text-sm font-medium rounded-t-md transition-colors duration-150 flex items-center text-md"
+    [routerLink]="['/info']"
+    routerLinkActive="bg-white text-gray-900"
+  >
+    <span class="material-symbols-outlined pr-1"> info </span> Guides
+  </button>
+</div>

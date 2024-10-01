@@ -15,4 +15,8 @@ export class ToastComponent {
   constructor(private configSvc: ConfigService) {
     this.toast$ = configSvc.toast$
   }
+
+  killToast() {
+    this.configSvc.killToast()
+  }
 }
