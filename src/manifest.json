@@ -52,7 +52,7 @@
       "js": [
         "content-script.js"
       ],
-      "all_frames": true
+      "all_frames": false
     }
   ]
 }
