@@ -50,7 +50,6 @@ export class SummaryComponent {
     this.configSvc.showToast('loading', 'Generating summary...')
 
     const tabHtml = (await this.tabService.getCurrentTabContent())?.html
-    console.log(tabHtml)
     if (!tabHtml) {
       this.configSvc.showToast('error', 'Failed to get tab content', 3000)
       return
@@ -68,7 +67,7 @@ export class SummaryComponent {
     if (tabContent.textContent.includes('protected by reCAPTCHA')) {
       this.configSvc.showToast(
         'error',
-        'Webpage prevent getting contents, please try again',
+        'This webpage is preventing content retrieval. Please try again.',
         3000,
       )
       return
