@@ -5,6 +5,7 @@ import {
   ViewChild,
   WritableSignal,
 } from '@angular/core'
+import { RouterLink } from '@angular/router'
 import { Readability } from '@mozilla/readability'
 import { Provider } from '../../service/config/config.interface'
 import { ConfigService } from '../../service/config/config.service'
@@ -14,7 +15,7 @@ import { TabService } from '../../service/tab/tab.service'
 @Component({
   selector: 'app-summary',
   standalone: true,
-  imports: [],
+  imports: [RouterLink],
   templateUrl: './summary.component.html',
   styleUrl: './summary.component.scss',
 })

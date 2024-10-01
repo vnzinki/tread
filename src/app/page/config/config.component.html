@@ -7,7 +7,7 @@
       <select
         id="default-provider"
         class="flex-grow bg-gray-700 text-white rounded px-3 py-2"
-        name="provider"
+        name="default-provider"
         [disabled]="activeProvider().length === 0"
         [(ngModel)]="config.defaultProvider"
       >
@@ -21,7 +21,7 @@
         }
 
         @if (activeProvider().length === 0) {
-          <option value="none">No available provider</option>
+          <option selected value="none">No available provider</option>
         }
       </select>
     </div>

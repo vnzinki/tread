@@ -22,6 +22,7 @@ export class ConfigComponent {
   ngOnInit(): void {}
 
   onSubmit(): void {
+    this.configSvc.showToast('success', 'Config saved!', 3000)
     this.configSvc.save(this.config)
   }
 
