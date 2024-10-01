@@ -49,22 +49,20 @@ export class SummaryComponent {
     this.generatedSummary$.set('')
     this.configSvc.showToast('loading', 'Generating summary...')
 
-    const tabHtml = (await this.tabService.getCurrentTabContent())?.html
-    if (!tabHtml) {
+    const tabData = await this.tabService.getCurrentTabContent()
+    if (!tabData?.html) {
       this.configSvc.showToast('error', 'Failed to get tab content', 3000)
       return
     }
 
-    const parser = new DOMParser()
-    const tabDoc = parser.parseFromString(tabHtml, 'text/html')
+    const tabContent = new Readability(
+      new DOMParser().parseFromString(tabData.html, 'text/html'),
+    ).parse()
 
-    const tabContent = new Readability(tabDoc).parse()
-    if (!tabContent) {
-      this.configSvc.showToast('error', 'Failed to parse tab content', 3000)
-      return
-    }
-
-    if (tabContent.textContent.includes('protected by reCAPTCHA')) {
+    if (
+      !tabContent ||
+      tabContent.textContent.includes('protected by reCAPTCHA')
+    ) {
       this.configSvc.showToast(
         'error',
         'This webpage is preventing content retrieval. Please try again.',

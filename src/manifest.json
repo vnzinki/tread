@@ -1,10 +1,14 @@
 {
   "name": "T.read - AI based reading assistant",
   "version": "1",
-  "description": "T.read - AI based reading assistant",
+  "description": "I love reading and believe in maximizing the use of free APIs to enhance the efficiency and convenience of my reading experience. Happy reading!",
   "manifest_version": 3,
   "action": {},
-  "icons": {},
+  "icons": {
+    "16": "assets/images/logo-16.png",
+    "48": "assets/images/logo-48.png",
+    "128": "assets/images/logo-128.png"
+  },
   "background": {
     "service_worker": "background.js"
   },
@@ -30,7 +34,7 @@
     {
       "resources": [
         "index.html",
-        "assets/images/*",
+        "assets/*",
         "main.js",
         "*.js"
       ],

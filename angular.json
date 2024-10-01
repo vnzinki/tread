@@ -29,6 +29,7 @@
               "src/content-script.js",
               "src/background.js",
               "src/manifest.json",
+              "src/assets",
               {
                 "glob": "**/*",
                 "input": "public"
