@@ -28,7 +28,7 @@ export interface Config {
 export const defaultConfig: Config = {
   defaultProvider: 'groq',
   translate: {
-    enable: true,
+    enable: false,
     defaultLanguage: 'Vietnamese',
   },
   providers: {
@@ -52,7 +52,18 @@ export const defaultConfig: Config = {
 
 export const availableOptions = {
   provider: ['openai', 'groq', 'gemini'] as Provider[],
-  availableLanguages: ['Vietnamese', 'English'],
+  availableLanguages: [
+    'Vietnamese',
+    'English',
+    'Mandarin',
+    'Spanish',
+    'English',
+    'Hindi',
+    'Bengali',
+    'Portuguese',
+    'Russian',
+    'Japanese',
+  ],
   groq: {
     model: [
       'distil-whisper-large-v3-en',
