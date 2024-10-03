@@ -1,4 +1,4 @@
-export type Provider = 'groq' | 'openai' | 'gemini'
+export type Provider = 'groq' | 'openai' | 'gemini' | 'huggingface'
 
 export interface Config {
   defaultProvider: Provider
@@ -18,6 +18,11 @@ export interface Config {
       api_key: string
     }
     gemini: {
+      enable: boolean
+      model: string
+      api_key: string
+    }
+    huggingface: {
       enable: boolean
       model: string
       api_key: string
@@ -47,17 +52,21 @@ export const defaultConfig: Config = {
       model: 'llama-3.1-8b-instant',
       api_key: '',
     },
+    huggingface: {
+      enable: false,
+      model: 'mistralai/Mistral-Nemo-Instruct-2407',
+      api_key: '',
+    },
   },
 }
 
 export const availableOptions = {
-  provider: ['openai', 'groq', 'gemini'] as Provider[],
+  provider: ['openai', 'groq', 'gemini', 'huggingface'] as Provider[],
   availableLanguages: [
     'Vietnamese',
     'English',
     'Mandarin',
     'Spanish',
-    'English',
     'Hindi',
     'Bengali',
     'Portuguese',
@@ -93,5 +102,12 @@ export const availableOptions = {
   },
   gemini: {
     model: ['gemini-1.5-flash', 'gemini-1.5-pro', 'gemini-1.0-pro'],
+  },
+  huggingface: {
+    model: [
+      'mistralai/Mistral-Nemo-Instruct-2407',
+      'microsoft/Phi-3-mini-4k-instruct',
+      'meta-llama/Meta-Llama-3-8B-Instruct',
+    ],
   },
 }

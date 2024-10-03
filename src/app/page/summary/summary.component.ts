@@ -72,10 +72,18 @@ export class SummaryComponent {
       return
     }
 
-    await this.summarySvc.getSummary(provider, tabContent.textContent)
+    try {
+      await this.summarySvc.getSummary(provider, tabContent.textContent)
+      this.configSvc.killToast()
+    } catch (error) {
+      if (error instanceof Error) {
+        this.configSvc.showToast('error', error.message, 3000)
+      } else {
+        this.configSvc.showToast('error', 'Failed to generate summary', 3000)
+      }
+    }
 
     this.generatingSummary = false
-    this.configSvc.killToast()
   }
 
   availableProvider() {
