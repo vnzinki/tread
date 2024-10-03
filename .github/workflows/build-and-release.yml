@@ -33,7 +33,7 @@ jobs:
       - name: Download artifact
         uses: actions/download-artifact@v3
         with:
-          name: extension
+          name: tread-${{ github.ref_name }}
       - name: Create GitHub Release
         uses: actions/create-release@v1
         with:
