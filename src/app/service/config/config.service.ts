@@ -1,4 +1,5 @@
 import { Injectable, signal } from '@angular/core'
+import { merge } from 'lodash'
 import { Toast } from '../../block/toast/toast.interface'
 import { Config, defaultConfig, Provider } from './config.interface'
 
@@ -20,8 +21,7 @@ export class ConfigService {
     let config = defaultConfig
 
     const storedValue = this.storage.getItem(this.configKey)
-    if (storedValue) config = { ...config, ...JSON.parse(storedValue) }
-
+    if (storedValue) config = merge(config, JSON.parse(storedValue))
     this.config = config
   }
 
@@ -53,7 +53,7 @@ export class ConfigService {
     if (duration > 0) {
       setTimeout(() => {
         this.toast$.set({ show: false, type: 'success', message: '' })
-      }, 3000)
+      }, duration)
     }
   }
 

@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core'
+import { Provider } from '../config/config.interface'
 import { ConfigService } from '../config/config.service'
 import { OpenAiResponse } from './openai.response'
-import { Provider } from '../config/config.interface'
 
 @Injectable({
   providedIn: 'root',
@@ -28,26 +28,32 @@ export class OpenAiBaseService {
       langPrompt +
       ', keep it concise and structured. Return only the summary with html format, highlight important keyword, no additional communication.'
 
-    const response = await (
-      await fetch(this.baseURL + '/chat/completions', {
-        method: 'POST',
-        headers: {
-          Authorization: `Bearer ${config.providers[this.providerName].api_key}`,
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          messages: [
-            {
-              role: 'system',
-              content: systemPrompt,
-            },
-            { role: 'user', content: content },
-          ],
-          model: config.providers[this.providerName].model,
-        }),
-      })
-    ).text()
+    const response = await fetch(this.baseURL + '/chat/completions', {
+      method: 'POST',
+      headers: {
+        Authorization: `Bearer ${config.providers[this.providerName].api_key}`,
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        messages: [
+          {
+            role: 'system',
+            content: systemPrompt,
+          },
+          { role: 'user', content: content },
+        ],
+        model: config.providers[this.providerName].model,
+      }),
+    })
 
-    return (JSON.parse(response) as OpenAiResponse).choices[0].message.content
+    const responseJson = await response.json()
+
+    if (response.status >= 400) {
+      throw new Error(
+        responseJson.error + '. Please try again later or pick another one.',
+      )
+    }
+
+    return (responseJson as OpenAiResponse).choices[0].message.content
   }
 }

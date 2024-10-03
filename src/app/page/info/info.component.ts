@@ -25,6 +25,14 @@ export class InfoComponent {
       isOpen: false,
     },
     {
+      question: 'Which model should I select?',
+      answer: [
+        'In my experience, Gemini (free) and OpenAI (paid) currently provide the best results. However, feel free to explore other available options.',
+      ],
+      isChecklist: false,
+      isOpen: false,
+    },
+    {
       question: 'How can I get Gemini key?',
       answer: [
         'Create new account at <a class="font-bold" href="https://ai.google.dev/aistudio" target="_blank"><span class="material-symbols-outlined text-sm">open_in_new</span>Google AI Studio</a>',
@@ -50,6 +58,17 @@ export class InfoComponent {
         'Create new account at <a class="font-bold" href="https://platform.openai.com/signup" target="_blank"><span class="material-symbols-outlined text-sm">open_in_new</span>OpenAI Platform</a>',
         'Go to <a class="font-bold" href="https://platform.openai.com/api-keys" target="_blank"><span class="material-symbols-outlined text-sm">open_in_new</span>API Keys</a> page.',
         'Click <span class="rounded-md border bg-gray-100 px-[0.25rem] py-[0.15rem] font-mono">Create new secret key</span> button to generate key.',
+      ],
+      isChecklist: true,
+      isOpen: false,
+    },
+    {
+      question: 'How can I get HuggingFace key?',
+      answer: [
+        'Create new account at <a class="font-bold" href="https://huggingface.co/join" target="_blank"><span class="material-symbols-outlined text-sm">open_in_new</span>Hugging Face Hub</a>',
+        'Go to <a class="font-bold" href="https://huggingface.co/settings/tokens" target="_blank"><span class="material-symbols-outlined text-sm">open_in_new</span>Access Tokens</a> page.',
+        'Click <span class="rounded-md border bg-gray-100 px-[0.25rem] py-[0.15rem] font-mono">Create new token</span>.',
+        'Select <span class="rounded-md border bg-gray-100 px-[0.25rem] py-[0.15rem] font-mono">Read</span> token type then click <span class="rounded-md border bg-gray-100 px-[0.25rem] py-[0.15rem] font-mono">Create token</span> button to generate key.',
       ],
       isChecklist: true,
       isOpen: false,
