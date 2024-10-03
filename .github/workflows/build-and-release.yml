@@ -38,7 +38,3 @@ jobs:
         uses: actions/create-release@v1
         with:
           tag_name: ${{ github.ref_name }}
-          name: tread-${{ github.ref_name }}
-          body: tread-${{ github.ref_name }}
-          draft: false
-          prerelease: false
