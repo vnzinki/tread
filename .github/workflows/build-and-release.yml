@@ -23,7 +23,7 @@ jobs:
       - name: Build
         run: npm run build
       - name: Zip
-        run: cd ./dist/tread/browser && zip -r ../../../tread-${{ github.ref_name }}.zip ./* && ../../../
+        run: cd ./dist/tread/browser && zip -r ../../../tread-${{ github.ref_name }}.zip ./* && cd ../../../
       - name: Upload
         uses: actions/upload-artifact@v3
         with:
