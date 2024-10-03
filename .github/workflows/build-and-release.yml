@@ -19,7 +19,7 @@ jobs:
       - name: Build
         run: npm run build
       - name: Zip
-        run: zip -r extension.zip dist/*
+        run: zip -r tread-${{ github.ref_name }}.zip dist/*
       - name: Upload
         uses: actions/upload-artifact@v3
         with:
