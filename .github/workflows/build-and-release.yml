@@ -36,6 +36,7 @@ jobs:
           name: tread-${{ github.ref_name }}
       - name: Release
         uses: softprops/action-gh-release@v2
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           files: tread-${{ github.ref_name }}.zip
-          token: ${{ secrets.CUSTOM_GITHUB_TOKEN }}
