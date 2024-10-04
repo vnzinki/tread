@@ -74,6 +74,16 @@ export class InfoComponent {
       isOpen: false,
     },
     {
+      question: 'How can I get Mistral key?',
+      answer: [
+        'Create new account at <a class="font-bold" href="https://console.mistral.ai/" target="_blank"><span class="material-symbols-outlined text-sm">open_in_new</span>Mistral AI Console</a>',
+        'Go to <a class="font-bold" href="https://console.mistral.ai/api-keys/" target="_blank"><span class="material-symbols-outlined text-sm">open_in_new</span>Your API Keys</a> page.',
+        'Click <span class="rounded-md border bg-gray-100 px-[0.25rem] py-[0.15rem] font-mono">Create new key</span> button to generate key.',
+      ],
+      isChecklist: true,
+      isOpen: false,
+    },
+    {
       question: 'What is translate feature?',
       answer:
         'This feature attempts to translate the summary content into your preferred language. You can change your language settings on the configuration page. Note that some models do not support translation yet, so results may vary.',

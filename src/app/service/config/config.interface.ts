@@ -1,4 +1,4 @@
-export type Provider = 'groq' | 'openai' | 'gemini' | 'huggingface'
+export type Provider = 'groq' | 'openai' | 'gemini' | 'huggingface' | 'mistral'
 
 export interface Config {
   defaultProvider: Provider
@@ -23,6 +23,11 @@ export interface Config {
       api_key: string
     }
     huggingface: {
+      enable: boolean
+      model: string
+      api_key: string
+    }
+    mistral: {
       enable: boolean
       model: string
       api_key: string
@@ -57,11 +62,22 @@ export const defaultConfig: Config = {
       model: 'mistralai/Mistral-Nemo-Instruct-2407',
       api_key: '',
     },
+    mistral: {
+      enable: false,
+      model: 'pixtral-12b-2409',
+      api_key: '',
+    },
   },
 }
 
 export const availableOptions = {
-  provider: ['openai', 'groq', 'gemini', 'huggingface'] as Provider[],
+  provider: [
+    'openai',
+    'groq',
+    'gemini',
+    'huggingface',
+    'mistral',
+  ] as Provider[],
   availableLanguages: [
     'Vietnamese',
     'English',
@@ -108,6 +124,17 @@ export const availableOptions = {
       'mistralai/Mistral-Nemo-Instruct-2407',
       'microsoft/Phi-3-mini-4k-instruct',
       'meta-llama/Meta-Llama-3-8B-Instruct',
+    ],
+  },
+  mistral: {
+    model: [
+      'pixtral-12b',
+      'open-mistral-nemo',
+      'open-codestral-mamba',
+      'mistral-large-latest',
+      'mistral-small-latest',
+      'codestral-latest',
+      'mistral-embed',
     ],
   },
 }

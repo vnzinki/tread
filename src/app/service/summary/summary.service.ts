@@ -3,6 +3,7 @@ import { Provider } from '../config/config.interface'
 import { GeminiService } from '../gemini/gemini.service'
 import { GroqService } from '../groq/groq.service'
 import { HuggingfaceService } from '../huggingface/huggingface.service'
+import { MistralService } from '../mistral/mistral.service'
 import { OpenAiService } from '../openai/openai.service'
 
 @Injectable({
@@ -16,6 +17,7 @@ export class SummaryService {
     private geminiSvc: GeminiService,
     private openaiSvc: OpenAiService,
     private huggingfaceSvc: HuggingfaceService,
+    private mistralSvc: MistralService,
   ) {
     this.generatedSummary$ = signal('')
   }
@@ -30,6 +32,9 @@ export class SummaryService {
         break
       case 'groq':
         this.generatedSummary$.set(await this.groqSvc.getSummary(content))
+        break
+      case 'mistral':
+        this.generatedSummary$.set(await this.mistralSvc.getSummary(content))
         break
       case 'huggingface':
         this.generatedSummary$.set(
