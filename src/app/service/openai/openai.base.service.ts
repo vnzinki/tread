@@ -26,7 +26,7 @@ export class OpenAiBaseService {
     const systemPrompt =
       'You are a helpful assistant who can summary articles. Please summary the article ' +
       langPrompt +
-      ', keep it concise and structured. Return only the summary with html format, highlight important keyword, no additional communication.'
+      ', keep it concise and structured. Return only the summary with html format not markdown, highlight important keyword, no additional communication.'
 
     const response = await fetch(this.baseURL + '/chat/completions', {
       method: 'POST',
