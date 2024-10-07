@@ -1,6 +1,6 @@
 {
   "name": "T.read - AI based reading assistant",
-  "version": "1",
+  "version": "1.0.2",
   "description": "For those who love reading and use free APIs to make it more efficient and convenient. Happy reading!",
   "manifest_version": 3,
   "action": {},
