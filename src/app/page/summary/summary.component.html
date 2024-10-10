@@ -15,7 +15,7 @@
   @if (dropdownOpen) {
     <div
       #dropdownMenu
-      class="absolute right-0 mt-10 w-48 bg-white rounded-md shadow-lg text-left"
+      class="absolute right-0 mt-10 w-48 bg-white rounded-md shadow-lg text-left z-50"
     >
       <div class="py-1">
         @for (provider of availableProvider(); track provider) {
@@ -39,6 +39,7 @@
 </div>
 <div class="bg-white rounded-lg shadow-lg p-4">
   @if (!generatingSummary) {
+    <app-tts-player [summaryText]="generatedSummary$()"></app-tts-player>
     <article
       class="prose lg:prose-lg xl:prose-xl max-w-none"
       [innerHTML]="generatedSummary$()"

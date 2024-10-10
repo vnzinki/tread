@@ -1,0 +1,25 @@
+@if (ttsSrc) {
+  <audio
+    class="mb-4 w-full -z-50"
+    slot="media"
+    [src]="ttsSrc"
+    crossorigin
+    autoplay
+    controls
+  ></audio>
+} @else {
+  @if (summaryText) {
+    <button
+      class="flex mb-4 items-center justify-center space-x-2 px-4 py-2 bg-gray-500 text-white rounded-full hover:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2 transition-colors duration-200 ease-in-out"
+      (click)="generateTTS()"
+    >
+      @if (!isLoading) {
+        <span class="material-symbols-outlined"> play_circle </span>
+        Generate text to speech
+      } @else {
+        <span class="material-symbols-outlined animate-spin"> sync </span>
+        Generating...
+      }
+    </button>
+  }
+}

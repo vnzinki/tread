@@ -7,7 +7,8 @@ import {
 } from '@angular/core'
 import { RouterLink } from '@angular/router'
 import { Readability } from '@mozilla/readability'
-import { Provider } from '../../service/config/config.interface'
+import { TTSPlayerComponent } from '../../block/tts-player/tts-player.component'
+import { SummaryProvider } from '../../service/config/config.interface'
 import { ConfigService } from '../../service/config/config.service'
 import { SummaryService } from '../../service/summary/summary.service'
 import { TabService } from '../../service/tab/tab.service'
@@ -15,7 +16,7 @@ import { TabService } from '../../service/tab/tab.service'
 @Component({
   selector: 'app-summary',
   standalone: true,
-  imports: [RouterLink],
+  imports: [RouterLink, TTSPlayerComponent],
   templateUrl: './summary.component.html',
   styleUrl: './summary.component.scss',
 })
@@ -44,7 +45,7 @@ export class SummaryComponent {
     })
   }
 
-  async summaryGenerate(provider: Provider) {
+  async summaryGenerate(provider: SummaryProvider) {
     this.closeDropdown()
     this.generatingSummary = true
     this.generatedSummary$.set('')
@@ -91,7 +92,7 @@ export class SummaryComponent {
       .availableProviders()
       .filter(
         (provider) => provider !== this.configSvc.getAll().defaultProvider,
-      ) as Provider[]
+      ) as SummaryProvider[]
   }
 
   toggleDropdown() {

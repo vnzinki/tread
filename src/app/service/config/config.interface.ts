@@ -1,7 +1,14 @@
-export type Provider = 'groq' | 'openai' | 'gemini' | 'huggingface' | 'mistral'
+export type SummaryProvider =
+  | 'groq'
+  | 'openai'
+  | 'gemini'
+  | 'huggingface'
+  | 'mistral'
+
+export type TTSProvider = 'playht'
 
 export interface Config {
-  defaultProvider: Provider
+  defaultProvider: SummaryProvider
   translate: {
     enable: boolean
     defaultLanguage: string
@@ -77,7 +84,7 @@ export const availableOptions = {
     'gemini',
     'huggingface',
     'mistral',
-  ] as Provider[],
+  ] as SummaryProvider[],
   availableLanguages: [
     'Vietnamese',
     'English',

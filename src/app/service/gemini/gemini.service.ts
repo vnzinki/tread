@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core'
-import { Provider } from '../config/config.interface'
+import { SummaryProvider } from '../config/config.interface'
 import { ConfigService } from '../config/config.service'
 import { GeminiResponse } from './gemini.response'
 
@@ -7,7 +7,7 @@ import { GeminiResponse } from './gemini.response'
   providedIn: 'root',
 })
 export class GeminiService {
-  providerName: Provider = 'gemini'
+  providerName: SummaryProvider = 'gemini'
   baseURL = 'https://generativelanguage.googleapis.com/v1beta'
 
   constructor(private configSvc: ConfigService) {}

@@ -1,5 +1,5 @@
 import { Injectable, signal, WritableSignal } from '@angular/core'
-import { Provider } from '../config/config.interface'
+import { SummaryProvider } from '../config/config.interface'
 import { GeminiService } from '../gemini/gemini.service'
 import { GroqService } from '../groq/groq.service'
 import { HuggingfaceService } from '../huggingface/huggingface.service'
@@ -22,7 +22,7 @@ export class SummaryService {
     this.generatedSummary$ = signal('')
   }
 
-  async getSummary(provider: Provider, content: string) {
+  async getSummary(provider: SummaryProvider, content: string) {
     switch (provider) {
       case 'gemini':
         this.generatedSummary$.set(await this.geminiSvc.getSummary(content))

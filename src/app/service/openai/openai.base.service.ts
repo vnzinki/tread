@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core'
-import { Provider } from '../config/config.interface'
+import { SummaryProvider } from '../config/config.interface'
 import { ConfigService } from '../config/config.service'
 import { OpenAiResponse } from './openai.response'
 
@@ -7,7 +7,7 @@ import { OpenAiResponse } from './openai.response'
   providedIn: 'root',
 })
 export class OpenAiBaseService {
-  providerName: Provider = 'openai'
+  providerName: SummaryProvider = 'openai'
   baseURL = ''
 
   constructor(private configSvc: ConfigService) {}
@@ -20,8 +20,8 @@ export class OpenAiBaseService {
     }
 
     const langPrompt = config.translate.enable
-      ? ''
-      : 'in ' + config.translate.defaultLanguage + ' language'
+      ? 'in ' + config.translate.defaultLanguage + ' language'
+      : ''
 
     const systemPrompt =
       'You are a helpful assistant who can summary articles. Please summary the article ' +

@@ -1,7 +1,7 @@
 import { Injectable, signal } from '@angular/core'
 import { merge } from 'lodash'
 import { Toast } from '../../block/toast/toast.interface'
-import { Config, defaultConfig, Provider } from './config.interface'
+import { Config, defaultConfig, SummaryProvider } from './config.interface'
 
 @Injectable({
   providedIn: 'root',
@@ -39,8 +39,8 @@ export class ConfigService {
 
   availableProviders() {
     return Object.keys(this.getAll().providers).filter(
-      (provider) => this.getAll().providers[provider as Provider].enable,
-    ) as Provider[]
+      (provider) => this.getAll().providers[provider as SummaryProvider].enable,
+    ) as SummaryProvider[]
   }
 
   showToast(
