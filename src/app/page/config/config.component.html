@@ -2,44 +2,44 @@
   <form (ngSubmit)="onSubmit()">
     <div class="flex items-center justify-between p-6">
       <label for="default-provider" class="text-base text-white pr-8"
-        >Default Provider</label
+        >Default Summary Provider</label
       >
       <select
         id="default-provider"
         class="flex-grow bg-gray-700 text-white rounded px-3 py-2"
         name="default-provider"
-        [disabled]="activeProvider().length === 0"
-        [(ngModel)]="config.defaultProvider"
+        [disabled]="activeSummaryProvider().length === 0"
+        [(ngModel)]="config.defaultSummaryProvider"
       >
-        @for (provider of activeProvider(); track provider) {
+        @for (provider of activeSummaryProvider(); track provider) {
           <option
             [value]="provider"
-            [selected]="provider === config.defaultProvider"
+            [selected]="provider === config.defaultSummaryProvider"
           >
             {{ provider }}
           </option>
         }
 
-        @if (activeProvider().length === 0) {
+        @if (activeSummaryProvider().length === 0) {
           <option selected value="none">No available provider</option>
         }
       </select>
     </div>
 
-    @for (provider of availableOptions.provider; track provider) {
+    @for (provider of availableOptions.summaryProvider; track provider) {
       <div class="m-2 p-4 hover:bg-gray-800 rounded-md">
         <div
           class="inline-flex items-center cursor-pointer"
           (click)="
-            config.providers[provider].enable =
-              !config.providers[provider].enable
+            config.summaryProviders[provider].enable =
+              !config.summaryProviders[provider].enable
           "
         >
           <input
             id="{{ provider }}-enable"
             type="checkbox"
             class="sr-only peer"
-            [checked]="config.providers[provider].enable"
+            [checked]="config.summaryProviders[provider].enable"
           />
           <div
             class="relative w-11 h-6 pr-2 bg-gray-200 rounded-full peer peer-focus:ring-4 peer-focus:ring-blue-300 dark:peer-focus:ring-blue-800 dark:bg-gray-700 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-blue-600"
@@ -68,7 +68,7 @@
 
         <div
           class="space-y-4 overflow-hidden transition-all duration-150 ease-in-out"
-          [class]="config.providers[provider].enable ? 'h-auto' : 'h-0'"
+          [class]="config.summaryProviders[provider].enable ? 'h-auto' : 'h-0'"
         >
           <div class="pt-4">
             <label
@@ -79,7 +79,7 @@
             <select
               class="block w-full bg-gray-800 border border-gray-700 rounded-md py-2 pl-3 pr-10 text-sm appearance-none focus:outline-none focus:ring-2 focus:ring-blue-500"
               name="{{ provider }}-model"
-              [(ngModel)]="config.providers[provider].model"
+              [(ngModel)]="config.summaryProviders[provider].model"
             >
               @for (model of availableOptions[provider].model; track model) {
                 <option [value]="model" class="bg-gray-700 text-white">
@@ -98,7 +98,7 @@
             >
             <input
               name="{{ provider }}-api_key"
-              [(ngModel)]="config.providers[provider].api_key"
+              [(ngModel)]="config.summaryProviders[provider].api_key"
               class="block w-full bg-gray-800 border border-gray-700 rounded-md py-2 px-3 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
               placeholder="Enter {{ provider.toUpperCase() }} API Key"
               type="password"
@@ -169,6 +169,109 @@
         </div>
       </div>
     </div>
+
+    <div class="flex items-center justify-between p-6">
+      <label for="default-provider" class="text-base text-white pr-8"
+        >Default TTS Provider</label
+      >
+      <select
+        id="default-provider"
+        class="flex-grow bg-gray-700 text-white rounded px-3 py-2"
+        name="default-provider"
+        [disabled]="activeTTSProviders().length === 0"
+        [(ngModel)]="config.defaultTTSProvider"
+      >
+        @for (provider of activeTTSProviders(); track provider) {
+          <option
+            [value]="provider"
+            [selected]="provider === config.defaultTTSProvider"
+          >
+            {{ provider }}
+          </option>
+        }
+
+        @if (activeTTSProviders().length === 0) {
+          <option selected value="none">No available provider</option>
+        }
+      </select>
+    </div>
+
+    @for (provider of availableOptions.ttsProvider; track provider) {
+      <div class="m-2 p-4 hover:bg-gray-800 rounded-md">
+        <div
+          class="inline-flex items-center cursor-pointer"
+          (click)="
+            config.ttsProviders[provider].enable =
+              !config.ttsProviders[provider].enable
+          "
+        >
+          <input
+            id="{{ provider }}-enable"
+            type="checkbox"
+            class="sr-only peer"
+            [checked]="config.ttsProviders[provider].enable"
+          />
+          <div
+            class="relative w-11 h-6 pr-2 bg-gray-200 rounded-full peer peer-focus:ring-4 peer-focus:ring-blue-300 dark:peer-focus:ring-blue-800 dark:bg-gray-700 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-blue-600"
+          ></div>
+          <span
+            class="ms-3 text-sm font-medium text-gray-900 dark:text-gray-300 cursor-pointer"
+          >
+            {{ provider.toUpperCase() }} Settings
+            <div class="inline-block">
+              <span
+                class="material-symbols-outlined text-sm cursor-pointer peer"
+                [routerLink]="['/info']"
+              >
+                info
+              </span>
+              <div
+                id="{{ provider }}-tooltip"
+                role="tooltip"
+                class="hidden absolute z-10 p-2 text-sm text-white bg-gray-700 rounded-md peer-hover:block"
+              >
+                How to get {{ provider.toUpperCase() }} API Key?
+              </div>
+            </div>
+          </span>
+        </div>
+
+        <div
+          class="space-y-4 overflow-hidden transition-all duration-150 ease-in-out"
+          [class]="config.ttsProviders[provider].enable ? 'h-auto' : 'h-0'"
+        >
+          <div>
+            <label
+              for="{{ provider }}-api_key"
+              class="block text-sm font-medium mb-2"
+              >API Key</label
+            >
+            <input
+              name="{{ provider }}-api_key"
+              [(ngModel)]="config.ttsProviders[provider].api_key"
+              class="block w-full bg-gray-800 border border-gray-700 rounded-md py-2 px-3 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+              placeholder="Enter {{ provider.toUpperCase() }} API Key"
+              type="password"
+            />
+          </div>
+
+          <div>
+            <label
+              for="{{ provider }}-user_name"
+              class="block text-sm font-medium mb-2"
+              >User ID</label
+            >
+            <input
+              name="{{ provider }}-user_name"
+              [(ngModel)]="config.ttsProviders[provider].user_id"
+              class="block w-full bg-gray-800 border border-gray-700 rounded-md py-2 px-3 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+              placeholder="Enter {{ provider.toUpperCase() }} User ID"
+              type="password"
+            />
+          </div>
+        </div>
+      </div>
+    }
 
     <!-- Submit Button -->
     <div class="px-6">

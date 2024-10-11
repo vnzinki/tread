@@ -26,7 +26,11 @@ export class ConfigComponent {
     this.configSvc.save(this.config)
   }
 
-  activeProvider() {
-    return this.configSvc.availableProviders()
+  activeSummaryProvider() {
+    return this.configSvc.availableSummaryProviders()
+  }
+
+  activeTTSProviders() {
+    return this.configSvc.availableTTSProviders()
   }
 }

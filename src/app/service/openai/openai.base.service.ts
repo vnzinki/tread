@@ -31,7 +31,7 @@ export class OpenAiBaseService {
     const response = await fetch(this.baseURL + '/chat/completions', {
       method: 'POST',
       headers: {
-        Authorization: `Bearer ${config.providers[this.providerName].api_key}`,
+        Authorization: `Bearer ${config.summaryProviders[this.providerName].api_key}`,
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
@@ -42,7 +42,7 @@ export class OpenAiBaseService {
           },
           { role: 'user', content: content },
         ],
-        model: config.providers[this.providerName].model,
+        model: config.summaryProviders[this.providerName].model,
       }),
     })
 

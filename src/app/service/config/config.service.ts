@@ -1,7 +1,12 @@
 import { Injectable, signal } from '@angular/core'
 import { merge } from 'lodash'
 import { Toast } from '../../block/toast/toast.interface'
-import { Config, defaultConfig, SummaryProvider } from './config.interface'
+import {
+  Config,
+  defaultConfig,
+  SummaryProvider,
+  TTSProvider,
+} from './config.interface'
 
 @Injectable({
   providedIn: 'root',
@@ -37,10 +42,17 @@ export class ConfigService {
     return this.config
   }
 
-  availableProviders() {
-    return Object.keys(this.getAll().providers).filter(
-      (provider) => this.getAll().providers[provider as SummaryProvider].enable,
+  availableSummaryProviders() {
+    return Object.keys(this.getAll().summaryProviders).filter(
+      (provider) =>
+        this.getAll().summaryProviders[provider as SummaryProvider].enable,
     ) as SummaryProvider[]
+  }
+
+  availableTTSProviders() {
+    return Object.keys(this.getAll().ttsProviders).filter(
+      (provider) => this.getAll().ttsProviders[provider as TTSProvider].enable,
+    ) as TTSProvider[]
   }
 
   showToast(

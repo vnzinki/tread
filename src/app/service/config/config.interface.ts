@@ -8,12 +8,13 @@ export type SummaryProvider =
 export type TTSProvider = 'playht'
 
 export interface Config {
-  defaultProvider: SummaryProvider
+  defaultSummaryProvider: SummaryProvider
+  defaultTTSProvider: TTSProvider
   translate: {
     enable: boolean
     defaultLanguage: string
   }
-  providers: {
+  summaryProviders: {
     openai: {
       enable: boolean
       model: string
@@ -40,15 +41,24 @@ export interface Config {
       api_key: string
     }
   }
+  ttsProviders: {
+    playht: {
+      enable: boolean
+      api_key: string
+      user_id: string
+      speed: number
+    }
+  }
 }
 
 export const defaultConfig: Config = {
-  defaultProvider: 'groq',
+  defaultSummaryProvider: 'groq',
+  defaultTTSProvider: 'playht',
   translate: {
     enable: false,
     defaultLanguage: 'Vietnamese',
   },
-  providers: {
+  summaryProviders: {
     openai: {
       enable: false,
       model: 'gpt-3.5-turbo',
@@ -75,16 +85,25 @@ export const defaultConfig: Config = {
       api_key: '',
     },
   },
+  ttsProviders: {
+    playht: {
+      enable: false,
+      api_key: '',
+      user_id: '',
+      speed: 1,
+    },
+  },
 }
 
 export const availableOptions = {
-  provider: [
+  summaryProvider: [
     'openai',
     'groq',
     'gemini',
     'huggingface',
     'mistral',
   ] as SummaryProvider[],
+  ttsProvider: ['playht'] as TTSProvider[],
   availableLanguages: [
     'Vietnamese',
     'English',

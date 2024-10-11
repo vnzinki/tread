@@ -89,9 +89,10 @@ export class SummaryComponent {
 
   availableProvider() {
     return this.configSvc
-      .availableProviders()
+      .availableSummaryProviders()
       .filter(
-        (provider) => provider !== this.configSvc.getAll().defaultProvider,
+        (provider) =>
+          provider !== this.configSvc.getAll().defaultSummaryProvider,
       ) as SummaryProvider[]
   }
 
