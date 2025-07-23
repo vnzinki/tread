@@ -2,28 +2,30 @@
   <form (ngSubmit)="onSubmit()">
     <div class="flex items-center justify-between p-6">
       <label for="default-provider" class="text-base text-white pr-8"
-        >Default Provider</label
-      >
-      <select
-        id="default-provider"
-        class="flex-grow bg-gray-700 text-white rounded px-3 py-2"
-        name="default-provider"
-        [disabled]="activeProvider().length === 0"
-        [(ngModel)]="config.defaultProvider"
-      >
-        @for (provider of activeProvider(); track provider) {
-          <option
-            [value]="provider"
-            [selected]="provider === config.defaultProvider"
-          >
-            {{ provider }}
-          </option>
-        }
-
-        @if (activeProvider().length === 0) {
-          <option selected value="none">No available provider</option>
-        }
-      </select>
+        >Default Provider
+      </label>
+      @if (activeProvider().length > 0) {
+        <select
+          id="default-provider"
+          class="flex-grow bg-gray-700 text-white rounded px-3 py-2"
+          name="default-provider"
+          [disabled]="activeProvider().length === 0"
+          [(ngModel)]="config.defaultProvider"
+        >
+          @for (provider of activeProvider(); track provider) {
+            <option
+              [value]="provider"
+              [selected]="provider === config.defaultProvider"
+            >
+              {{ provider }}
+            </option>
+          }
+        </select>
+      } @else {
+        <span class="flex-grow bg-gray-700 text-white rounded px-3 py-2"
+          >Set API key first</span
+        >
+      }
     </div>
 
     @for (provider of availableOptions.provider; track provider) {

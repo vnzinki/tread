@@ -28,35 +28,38 @@ export class GeminiService {
       langPrompt +
       ', keep it concise and structured. Return only the summary with html format not markdown, highlight important keyword, no additional communication.'
 
-    const response = await (
-      await fetch(
-        this.baseURL +
-          '/models/' +
-          config.providers[this.providerName].model +
-          ':generateContent?key=' +
-          config.providers[this.providerName].api_key,
-        {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({
-            system_instruction: {
-              parts: {
-                text: systemPrompt,
-              },
-            },
-            contents: {
-              parts: {
-                text: content,
-              },
-            },
-          }),
+    const response = await fetch(
+      this.baseURL +
+        '/models/' +
+        config.providers[this.providerName].model +
+        ':generateContent?key=' +
+        config.providers[this.providerName].api_key,
+      {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
         },
-      )
-    ).text()
+        body: JSON.stringify({
+          system_instruction: {
+            parts: {
+              text: systemPrompt,
+            },
+          },
+          contents: {
+            parts: {
+              text: content,
+            },
+          },
+        }),
+      },
+    )
 
-    return (JSON.parse(response) as GeminiResponse).candidates[0].content
-      .parts[0].text
+    const responseJson = await response.json()
+
+    if (response.status !== 200) {
+      throw new Error(responseJson.error.message)
+    }
+
+    return (responseJson as GeminiResponse).candidates[0].content.parts[0].text
   }
 }

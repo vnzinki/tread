@@ -3,9 +3,9 @@
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve --watch --configuration development",
+    "start:watch": "ng serve --watch --configuration development",
     "build": "ng build",
-    "watch": "ng build --watch --configuration development",
+    "build:watch": "ng build --watch --configuration development",
     "test": "ng test"
   },
   "private": true,

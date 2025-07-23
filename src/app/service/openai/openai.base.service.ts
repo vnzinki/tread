@@ -48,10 +48,8 @@ export class OpenAiBaseService {
 
     const responseJson = await response.json()
 
-    if (response.status >= 400) {
-      throw new Error(
-        responseJson.error + '. Please try again later or pick another one.',
-      )
+    if (response.status !== 200) {
+      throw new Error(responseJson.error.message)
     }
 
     return (responseJson as OpenAiResponse).choices[0].message.content

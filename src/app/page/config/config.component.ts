@@ -27,6 +27,7 @@ export class ConfigComponent {
   }
 
   activeProvider() {
-    return this.configSvc.availableProviders()
+    const activeProvider = this.configSvc.availableProviders()
+    return activeProvider
   }
 }

@@ -1,7 +1,7 @@
-export type Provider = 'groq' | 'openai' | 'gemini' | 'huggingface' | 'mistral'
+export type Provider = 'groq' | 'openai' | 'gemini'
 
 export interface Config {
-  defaultProvider: Provider
+  defaultProvider: Provider | ''
   translate: {
     enable: boolean
     defaultLanguage: string
@@ -22,21 +22,11 @@ export interface Config {
       model: string
       api_key: string
     }
-    huggingface: {
-      enable: boolean
-      model: string
-      api_key: string
-    }
-    mistral: {
-      enable: boolean
-      model: string
-      api_key: string
-    }
   }
 }
 
 export const defaultConfig: Config = {
-  defaultProvider: 'groq',
+  defaultProvider: '',
   translate: {
     enable: false,
     defaultLanguage: 'Vietnamese',
@@ -44,40 +34,24 @@ export const defaultConfig: Config = {
   providers: {
     openai: {
       enable: false,
-      model: 'gpt-3.5-turbo',
+      model: 'gpt-4o',
       api_key: '',
     },
     groq: {
       enable: false,
-      model: 'llama3-groq-8b-8192-tool-use-preview',
+      model: 'distil-whisper-large-v3-en',
       api_key: '',
     },
     gemini: {
       enable: false,
-      model: 'llama-3.1-8b-instant',
-      api_key: '',
-    },
-    huggingface: {
-      enable: false,
-      model: 'mistralai/Mistral-Nemo-Instruct-2407',
-      api_key: '',
-    },
-    mistral: {
-      enable: false,
-      model: 'pixtral-12b-2409',
+      model: 'gemini-2.0-flash',
       api_key: '',
     },
   },
 }
 
 export const availableOptions = {
-  provider: [
-    'openai',
-    'groq',
-    'gemini',
-    'huggingface',
-    'mistral',
-  ] as Provider[],
+  provider: ['openai', 'groq', 'gemini'] as Provider[],
   availableLanguages: [
     'Vietnamese',
     'English',
@@ -93,48 +67,44 @@ export const availableOptions = {
     model: [
       'distil-whisper-large-v3-en',
       'gemma2-9b-it',
-      'gemma-7b-it',
-      'llama3-groq-70b-8192-tool-use-preview',
-      'llama3-groq-8b-8192-tool-use-preview',
-      'llama-3.1-70b-versatile',
       'llama-3.1-8b-instant',
-      'llama-guard-3-8b',
-      'llava-v1.5-7b-4096-preview',
-      'llama3-70b-8192',
-      'llama3-8b-8192',
-      'mixtral-8x7b-32768',
+      'llama-3.3-70b-versatile',
+      'meta-llama/llama-guard-4-12b',
       'whisper-large-v3',
+      'whisper-large-v3-turbo',
     ],
   },
   openai: {
     model: [
-      'gpt-3.5-turbo',
-      'gpt-3.5-turbo-0301',
-      'gpt-4',
-      'gpt-4-0314',
-      'gpt-4-32k',
-      'gpt-4-32k-0314',
+      'gpt-4.1',
+      'gpt-4.1-mini',
+      'gpt-4.1-nano',
+      'gpt-4.5-preview',
+      'gpt-4o',
+      'gpt-4o-mini',
+      'gpt-4o-mini-search-preview',
+      'gpt-4o-search-preview',
+      'o1',
+      'o1-mini',
+      'o1-pro',
+      'o3',
+      'o3-mini',
+      'o3-pro',
+      'o4-mini',
     ],
   },
   gemini: {
-    model: ['gemini-1.5-flash', 'gemini-1.5-pro', 'gemini-1.0-pro'],
-  },
-  huggingface: {
     model: [
-      'mistralai/Mistral-Nemo-Instruct-2407',
-      'microsoft/Phi-3-mini-4k-instruct',
-      'meta-llama/Meta-Llama-3-8B-Instruct',
-    ],
-  },
-  mistral: {
-    model: [
-      'pixtral-12b',
-      'open-mistral-nemo',
-      'open-codestral-mamba',
-      'mistral-large-latest',
-      'mistral-small-latest',
-      'codestral-latest',
-      'mistral-embed',
+      'gemini-1.5-flash-8b',
+      'gemini-1.5-flash',
+      'gemini-1.5-pro',
+      'gemini-2.0-flash-lite',
+      'gemini-2.0-flash-live-001',
+      'gemini-2.0-flash',
+      'gemini-2.5-flash-lite',
+      'gemini-2.5-flash',
+      'gemini-2.5-pro',
+      'gemini-live-2.5-flash-preview',
     ],
   },
 }

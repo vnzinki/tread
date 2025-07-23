@@ -9,7 +9,7 @@ import { Config, defaultConfig, Provider } from './config.interface'
 export class ConfigService {
   private storage = window.localStorage
   private configKey = 'treadConfig'
-  private config
+  private config: Config
 
   public toast$ = signal<Toast>({
     show: false,

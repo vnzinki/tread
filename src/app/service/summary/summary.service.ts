@@ -1,9 +1,9 @@
 import { Injectable, signal, WritableSignal } from '@angular/core'
-import { Provider } from '../config/config.interface'
+import { includes } from 'lodash'
+import { availableOptions, Provider } from '../config/config.interface'
+import { ConfigService } from '../config/config.service'
 import { GeminiService } from '../gemini/gemini.service'
 import { GroqService } from '../groq/groq.service'
-import { HuggingfaceService } from '../huggingface/huggingface.service'
-import { MistralService } from '../mistral/mistral.service'
 import { OpenAiService } from '../openai/openai.service'
 
 @Injectable({
@@ -13,16 +13,27 @@ export class SummaryService {
   generatedSummary$: WritableSignal<string>
 
   constructor(
+    private configSvc: ConfigService,
     private groqSvc: GroqService,
     private geminiSvc: GeminiService,
     private openaiSvc: OpenAiService,
-    private huggingfaceSvc: HuggingfaceService,
-    private mistralSvc: MistralService,
   ) {
     this.generatedSummary$ = signal('')
   }
 
   async getSummary(provider: Provider, content: string) {
+    const config = this.configSvc.getAll()
+    if (
+      !includes(
+        availableOptions[provider].model,
+        config.providers[provider].model,
+      )
+    ) {
+      throw new Error(
+        'Model is not valid! Please change your default model in Setting',
+      )
+    }
+
     switch (provider) {
       case 'gemini':
         this.generatedSummary$.set(await this.geminiSvc.getSummary(content))
@@ -32,14 +43,6 @@ export class SummaryService {
         break
       case 'groq':
         this.generatedSummary$.set(await this.groqSvc.getSummary(content))
-        break
-      case 'mistral':
-        this.generatedSummary$.set(await this.mistralSvc.getSummary(content))
-        break
-      case 'huggingface':
-        this.generatedSummary$.set(
-          await this.huggingfaceSvc.getSummary(content),
-        )
         break
       default:
         throw new Error('No provider found')

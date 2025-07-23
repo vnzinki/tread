@@ -44,7 +44,12 @@ export class SummaryComponent {
     })
   }
 
-  async summaryGenerate(provider: Provider) {
+  async summaryGenerate(provider: Provider | '') {
+    if (provider == '') {
+      this.configSvc.showToast('error', 'Please select a provider', 3000)
+      return
+    }
+
     this.closeDropdown()
     this.generatingSummary = true
     this.generatedSummary$.set('')
