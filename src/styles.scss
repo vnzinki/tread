@@ -1,6 +1,15 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+@reference "tailwindcss";
+
+body {
+  font-family: 'Inter', sans-serif;
+}
+
+button {
+  border-style: unset;
+}
 
 article.prose {
   font-family: 'Merriweather', Georgia, serif;
@@ -58,4 +67,8 @@ article.prose blockquote {
 article.prose code,
 article.prose mark {
   @apply rounded-[0.375rem] border bg-gray-100 px-[0.25rem] py-[0.15rem] font-mono text-xs font-normal before:hidden after:hidden;
+}
+
+div.peer-checkbox {
+  @apply relative w-11 h-6.5 pr-1 bg-gray-200 rounded-full peer-focus:ring-4 peer-focus:ring-blue-300 dark:peer-focus:ring-blue-800 dark:bg-gray-700 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-blue-600;
 }

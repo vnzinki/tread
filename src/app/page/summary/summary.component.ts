@@ -67,7 +67,7 @@ export class SummaryComponent {
 
     if (
       !tabContent ||
-      tabContent.textContent.includes('protected by reCAPTCHA')
+      tabContent.textContent?.includes('protected by reCAPTCHA')
     ) {
       this.configSvc.showToast(
         'error',
@@ -78,7 +78,7 @@ export class SummaryComponent {
     }
 
     try {
-      await this.summarySvc.getSummary(provider, tabContent.textContent)
+      await this.summarySvc.getSummary(provider, tabContent.textContent ?? '')
       this.configSvc.killToast()
     } catch (error) {
       if (error instanceof Error) {
