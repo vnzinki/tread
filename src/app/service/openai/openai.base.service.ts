@@ -3,9 +3,7 @@ import { Provider } from '../config/config.interface'
 import { ConfigService } from '../config/config.service'
 import { OpenAiResponse } from './openai.response'
 
-@Injectable({
-  providedIn: 'root',
-})
+@Injectable({ providedIn: 'root' })
 export class OpenAiBaseService {
   providerName: Provider = 'openai'
   baseURL = ''
@@ -26,7 +24,7 @@ export class OpenAiBaseService {
     const systemPrompt =
       'You are a helpful assistant who can summary articles. Please summary the article ' +
       langPrompt +
-      ', keep it concise and structured. Return only the summary with html format not markdown, highlight important keyword, no additional communication.'
+      ', keep it concise and structured. Return only the summary with raw html format without code block, not markdown, highlight important keyword, no additional communication.'
 
     const response = await fetch(this.baseURL + '/chat/completions', {
       method: 'POST',
@@ -36,10 +34,7 @@ export class OpenAiBaseService {
       },
       body: JSON.stringify({
         messages: [
-          {
-            role: 'system',
-            content: systemPrompt,
-          },
+          { role: 'system', content: systemPrompt },
           { role: 'user', content: content },
         ],
         model: config.providers[this.providerName].model,

@@ -3,9 +3,7 @@ import { Provider } from '../config/config.interface'
 import { ConfigService } from '../config/config.service'
 import { GeminiResponse } from './gemini.response'
 
-@Injectable({
-  providedIn: 'root',
-})
+@Injectable({ providedIn: 'root' })
 export class GeminiService {
   providerName: Provider = 'gemini'
   baseURL = 'https://generativelanguage.googleapis.com/v1beta'
@@ -26,7 +24,7 @@ export class GeminiService {
     const systemPrompt =
       'You are a helpful assistant who can summary articles. Please summary the article ' +
       langPrompt +
-      ', keep it concise and structured. Return only the summary with html format not markdown, highlight important keyword, no additional communication.'
+      ', keep it concise and structured. Return only the summary with raw html format without code block, not markdown, highlight important keyword, no additional communication.'
 
     const response = await fetch(
       this.baseURL +
@@ -36,20 +34,10 @@ export class GeminiService {
         config.providers[this.providerName].api_key,
       {
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
+        headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          system_instruction: {
-            parts: {
-              text: systemPrompt,
-            },
-          },
-          contents: {
-            parts: {
-              text: content,
-            },
-          },
+          system_instruction: { parts: { text: systemPrompt } },
+          contents: { parts: { text: content } },
         }),
       },
     )
